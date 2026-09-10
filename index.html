@@ -325,6 +325,23 @@
   .present-dots .pd{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.25);}
   .present-dots .pd.active{background:var(--dorado); width:22px; border-radius:5px;}
   .present-counter{color:#9AA6C2; font-size:12.5px; min-width:52px; text-align:center;}
+
+  /* Ejercicios aplicados */
+  .ejercicio-card{border:1px solid var(--line); border-left:4px solid var(--verde); border-radius:10px; padding:18px 20px 16px; margin-bottom:18px;}
+  .ejercicio-card:last-child{margin-bottom:0;}
+  .ej-num{font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--verde); margin-bottom:5px;}
+  .ej-titulo{font-size:15px; font-weight:700; margin:0 0 8px 0; color:var(--ink);}
+  .ej-objetivo{font-size:13px; color:var(--ink-soft); margin:0 0 14px 0; line-height:1.55;}
+  .ej-steps-label{font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink-soft); margin:0 0 7px 0;}
+  .ej-pasos{margin:0 0 16px 0; padding-left:20px;}
+  .ej-pasos li{font-size:13.5px; margin-bottom:7px; line-height:1.55;}
+  .prompt-box{background:var(--surface); border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  .prompt-header{display:flex; align-items:center; justify-content:space-between; padding:9px 14px; background:var(--verde);}
+  .prompt-label{font-size:12px; font-weight:700; color:#fff;}
+  .copy-btn{background:rgba(255,255,255,.22); border:1px solid rgba(255,255,255,.4); color:#fff; font-size:11.5px; font-weight:700; padding:4px 13px; border-radius:5px; cursor:pointer; transition:.15s;}
+  .copy-btn:hover{background:rgba(255,255,255,.38);}
+  .copy-btn.copied{background:#fff; color:var(--verde);}
+  .prompt-text{margin:0; padding:14px 16px; font-family:inherit; font-size:12.5px; line-height:1.65; white-space:pre-wrap; color:var(--ink); max-height:280px; overflow-y:auto;}
 </style>
 </head>
 <body>
@@ -614,7 +631,67 @@ const SESSIONS = [
     {q:"Los elementos de un diseño creado en Claude Design se pueden:", opts:["Solo ver, no modificar","Editar y ajustar después de generados (colores, textos, posición)","Solo exportar en audio","Eliminar automáticamente en 24 horas"], correct:1},
     {q:"¿Qué debes adjuntar como entregable de esta sesión?", opts:["Un video de la sesión en vivo","El diseño que creaste en Claude Design (imagen o PDF exportado)","Tu identificación oficial","Nada, es opcional"], correct:1}
   ],
-  entregable:{tipo:"file", etiqueta:"Adjunta el diseño que creaste en Claude Design", ayuda:"Exporta tu pieza como imagen (JPG/PNG) o PDF y súbela aquí. Tamaño máximo recomendado: 10 MB."}
+  entregable:{tipo:"file", etiqueta:"Adjunta el diseño que creaste en Claude Design", ayuda:"Exporta tu pieza como imagen (JPG/PNG) o PDF y súbela aquí. Tamaño máximo recomendado: 10 MB."},
+  ejercicios:[
+    {
+      num:1,
+      titulo:"Benchmark de mercado en presentación",
+      objetivo:"Genera un análisis ejecutivo de la categoría de confitería y chocolates en México, listo para compartirse o convertirse en presentación, usando únicamente un prompt en Claude.",
+      pasos:[
+        "Abre una conversación nueva en Claude (claude.ai) — no necesitas adjuntar ningún archivo.",
+        "Si quieres el resultado directo en formato presentación, activa Claude Design antes de pegar el prompt (ícono de paleta en la barra inferior).",
+        "Copia el prompt completo de abajo y pégalo en Claude.",
+        "Revisa el análisis generado: identifica los datos y tendencias más relevantes para la zona o cuentas que atiendes.",
+        "Pídele a Claude que convierta el análisis en una presentación de 5 a 6 diapositivas ejecutivas.",
+        "Exporta el resultado como PDF o imagen y compártelo con tu equipo."
+      ],
+      prompt:{titulo:"Prompt — Benchmark de mercado confitería",texto:"Actúa como analista de inteligencia comercial especializado en la industria de confitería, chocolates y snacks premium en México.\n\nTu tarea es generar un benchmark ejecutivo de mercado para la categoría, enfocado en punto de venta y promotoría, que sirva de base para una presentación interna.\n\nIncluye:\n\n1. PANORAMA DE LA CATEGORÍA\nTamaño estimado del mercado de chocolates y confitería en México (valor y volumen anual), principales segmentos (tableta, golosinas, premium, snacks) y estacionalidad más relevante (temporadas pico de venta).\n\n2. PRINCIPALES JUGADORES EN PUNTO DE VENTA\nLas 5 marcas con mayor presencia en anaquel en autoservicios y tiendas de conveniencia, sus estrategias de exhibición más comunes y los rangos de precio por segmento.\n\n3. TENDENCIAS ACTUALES DE CONSUMO\nQué está creciendo (ingredientes, formatos, ocasiones de consumo), qué está siendo desplazado, y cuáles son las oportunidades de nicho menos saturadas.\n\n4. INDICADORES CLAVE PARA PROMOTORÍA\nMétricas que las marcas líderes monitorean en punto de venta, buenas prácticas de gestión de anaquel y señales tempranas de pérdida de participación en una cuenta.\n\n5. RECOMENDACIONES ACCIONABLES (90 días)\n3 acciones concretas que una distribuidora-comercializadora puede implementar para mejorar su posición en el canal.\n\nFormato ejecutivo: secciones claras, datos cuantificables donde sea posible, hallazgos más relevantes en negritas. Al terminar, ofrece convertir el análisis en una presentación de 5 a 6 diapositivas lista para proyectarse."}
+    },
+    {
+      num:2,
+      titulo:"Video publicitario de producto (Ritter Pistache)",
+      objetivo:"Produce una pieza audiovisual publicitaria de 15 a 30 segundos para redes sociales y pantallas digitales de punto de venta, a partir de imágenes reales del producto.",
+      pasos:[
+        "PASO OBLIGATORIO: antes de pegar el prompt, adjunta 3 imágenes de Ritter Pistache a la conversación. Imagen 1: packaging frontal con buena resolución. Imagen 2: tableta o interior del chocolate, donde se vea la textura y el pistache. Imagen 3: ángulo complementario, producto abierto o imagen oficial adicional.",
+        "Usa imágenes oficiales de la marca o fotografías reales del producto. Evita screenshots de baja resolución o imágenes donde el empaque esté parcialmente oculto.",
+        "Abre una conversación nueva en Claude con el modelo de mayor capacidad disponible y activa todas las herramientas disponibles (Design, artefactos, código).",
+        "Carga las 3 imágenes en la conversación y luego copia y pega el prompt completo de abajo.",
+        "Claude analizará las imágenes, confirmará que las recibió y procederá automáticamente con la producción — no necesitas dar autorización adicional después del análisis.",
+        "Revisa el resultado: ajusta colores, texto o composición usando instrucciones en lenguaje natural ('hazlo más oscuro', 'agranda el producto', 'cambia el fondo').",
+        "Exporta la pieza final o descarga los archivos generados."
+      ],
+      prompt:{titulo:"Prompt — Video publicitario Ritter Pistache",texto:"EJERCICIO — CREACIÓN DE VIDEO PUBLICITARIO RITTER PISTACHE\n\nPASO 2 — VERIFICACIÓN OBLIGATORIA DE LAS IMÁGENES\nAntes de diseñar o generar cualquier contenido, analiza las 3 imágenes adjuntas.\nVerifica visualmente: logotipo, nombre exacto del producto, diseño del packaging, colores, tipografías, geometría, proporciones, apariencia del chocolate, textura, pistaches e información visible relevante.\nLas tres imágenes constituyen la REFERENCIA VISUAL PRINCIPAL Y OBLIGATORIA del ejercicio.\n\nREGLA CRÍTICA\nNO INVENTES NI REDISEÑES EL PRODUCTO.\nNo debes modificar arbitrariamente: logo, nombre Ritter, nombre Pistache, packaging, colores originales, tipografías de marca, proporciones, forma del chocolate, textos impresos ni elementos gráficos característicos.\nCuando generes nuevas escenas, debes utilizar las imágenes suministradas como ancla visual del producto real.\nPuedes crear alrededor del producto: fondos, pistaches, chocolate, partículas, iluminación, reflejos, sombras, movimiento, escenarios, composiciones, elementos gráficos. Pero el producto debe permanecer visualmente fiel a las referencias suministradas.\n\nPASO 3 — MODELO Y HERRAMIENTAS\nPara realizar este ejercicio, utiliza el modelo de Claude de mayor capacidad disponible en la cuenta que permita creación de artefactos, ejecución de código y trabajo visual.\nActiva todas las herramientas disponibles relacionadas con: diseño, creación visual, imágenes, animación, código, artifacts, archivos, composición audiovisual. Si existe una función específica de Claude Design, utilízala.\n\nPASO 4 — INICIO DEL TRABAJO\nNo comiences generando el video inmediatamente.\nPrimero:\n1. Confirma que recibiste y puedes visualizar las 3 imágenes.\n2. Analiza las tres referencias.\n3. Determina cuál imagen funcionará mejor como referencia principal del packaging.\n4. Determina cuál utilizarás para representar el chocolate/producto.\n5. Identifica los elementos visuales que deben preservarse obligatoriamente.\n6. Después de completar esta verificación, procede automáticamente con la producción.\nNo solicites autorización adicional después de analizar las imágenes.\n\nROL\nActúa simultáneamente como: Director Creativo Senior de una agencia internacional de publicidad, Director de Arte especializado en productos FMCG, Motion Designer, Especialista en publicidad digital y redes sociales, Especialista en diseño de materiales para Point of Sale (POS), Product Visual Designer, y Especialista en storytelling audiovisual de productos premium.\n\nOBJETIVO PRINCIPAL\nQuiero que diseñes y produzcas — no solamente conceptualices — una pieza audiovisual publicitaria de entre 15 y 30 segundos para Ritter Pistache.\nLa pieza debe tener calidad visual suficiente para utilizarse como una demostración realista de contenido publicitario para redes sociales y pantallas digitales en punto de venta (POS).\n\nA partir de este punto, continúa con TODAS las especificaciones de producción, storyboard, dirección de arte, motion design, audio, formatos, entregables y controles de calidad establecidos en este ejercicio.\n\nREGLA PRIORITARIA DURANTE TODO EL PROCESO:\nLas 3 imágenes cargadas al inicio tienen prioridad como referencia visual del producto. Si existe cualquier contradicción entre una interpretación generada y las fotografías suministradas, prevalecen las fotografías del producto real."}
+    },
+    {
+      num:3,
+      titulo:"Anticipación de tendencias en redes sociales",
+      objetivo:"Genera un análisis de tendencias emergentes en redes sociales para la categoría de confitería y propón un plan de contenido accionable para el equipo de Marketing o Promotoría.",
+      pasos:[
+        "Abre una conversación nueva en Claude — no necesitas adjuntar archivos para este ejercicio.",
+        "Antes de copiar el prompt, define dos datos: (1) el producto o categoría que quieres analizar (ejemplo: chocolates premium, snacks, Ritter Sport), y (2) la red social de interés (Instagram o TikTok).",
+        "Copia el prompt de abajo y sustituye los corchetes [PRODUCTO] y [RED SOCIAL] con tus datos antes de pegarlo.",
+        "Revisa las tendencias identificadas y señala en la conversación las que más aplican a tu zona o a las cuentas que atiendes.",
+        "Pídele a Claude que genere el calendario de contenido en formato tabla para que sea más fácil de revisar y compartir.",
+        "Exporta el resultado como documento o pídele que lo convierta en una presentación de 4 a 5 diapositivas para compartir con el equipo."
+      ],
+      prompt:{titulo:"Prompt — Tendencias en redes sociales",texto:"Actúa como estratega de contenido digital especializado en marcas de consumo masivo (FMCG) para el mercado mexicano, con experiencia en confitería, chocolates y snacks premium.\n\nTu tarea es hacer un análisis de anticipación de tendencias en redes sociales para la categoría de [PRODUCTO: ejemplo — chocolates premium / confitería / snacks], enfocado en [RED SOCIAL: Instagram / TikTok].\n\nEl análisis debe incluir:\n\n1. TENDENCIAS EMERGENTES (próximos 30 a 90 días)\nIdentifica 5 tendencias de contenido que están ganando tracción en la categoría de alimentos premium y confitería: formatos de video, hashtags en crecimiento, tipos de contenido (recetas, unboxings, comparativas, lifestyle), estéticas visuales con mayor engagement y creators o cuentas que las están impulsando.\n\n2. OPORTUNIDADES DE CONTENIDO\nPara cada tendencia, propón:\n— Un concepto de contenido concreto aplicable a una distribuidora-comercializadora de confitería en México\n— El formato ideal (Reel, Story, carrusel, TikTok corto de 15 a 30 segundos)\n— La duración sugerida y el gancho de apertura (primeros 3 segundos del video)\n— Si requiere producción profesional o puede hacerse con teléfono\n\n3. CALENDARIO DE PUBLICACIÓN (30 días)\nUn plan de contenido semanal estructurado en tabla, con:\n— Frecuencia de publicación por plataforma\n— Distribución de tipos de contenido (educativo, entretenimiento, conversión/venta)\n— Fechas estacionales o fechas clave de la categoría a aprovechar en el periodo\n\n4. INDICADORES DE ÉXITO\nLas 4 métricas más importantes que deberían monitorearse semanalmente para validar si el contenido está funcionando, y qué benchmark usar como referencia para la categoría.\n\nFormato: accionable, con tablas donde ayuden, bullets concretos y sin jerga técnica que no sea usable por un equipo de promotoría o marketing con experiencia básica en redes sociales."}
+    },
+    {
+      num:4,
+      titulo:"Kit de diseño digital para redes sociales",
+      objetivo:"Crea un kit de piezas gráficas listas para publicarse — post cuadrado, story vertical y variante promocional — para un producto real de la cartera KRAM, usando Claude Design.",
+      pasos:[
+        "Activa Claude Design en la conversación antes de pegar el prompt (ícono de paleta en la barra inferior de Claude).",
+        "Elige un producto de la cartera KRAM para el que quieras crear las piezas (ejemplo: Ritter Pistache, Kinder Bueno, Snickers Mini).",
+        "Si tienes imágenes del producto, adjúntalas antes de copiar el prompt — Claude las usará como referencia visual.",
+        "Copia el prompt de abajo y rellena los campos en corchetes con los datos del producto elegido antes de pegarlo.",
+        "Revisa el Art Direction Brief que Claude genere primero y ajusta lo que necesites antes de que proceda a crear las piezas ('cambia el fondo a oscuro', 'usa tipografía más bold', 'elimina el copy y deja solo el producto').",
+        "Una vez aprobado el brief, Claude procederá a crear las 3 piezas visuales en Claude Design.",
+        "Exporta cada pieza como imagen (JPG/PNG) o PDF para usarla en redes o pantallas digitales de PDV."
+      ],
+      prompt:{titulo:"Prompt — Kit de diseño digital para redes",texto:"Actúa como Director de Arte especializado en marketing digital para marcas de consumo masivo (FMCG) y punto de venta.\n\nQuiero que diseñes un kit de piezas gráficas para redes sociales del siguiente producto:\n\nPRODUCTO: [nombre del producto — ejemplo: Ritter Pistache / Snickers Mini / Kinder Bueno]\nMARCA: [marca comercial]\nCOLORES CLAVE: [colores del empaque o marca — ejemplo: verde oscuro y dorado / azul y rojo / burdeos y blanco]\nCANAL: [dónde se publicará — Instagram / TikTok / pantalla digital de PDV]\nOCASIÓN: [contexto de uso — temporada navideña / lanzamiento de producto / promoción fin de semana / exhibición especial]\n\nEl kit debe incluir:\n\n1. POST PRINCIPAL (feed cuadrado 1:1)\nComposición que muestre el producto como protagonista, con fondo que refuerce la identidad de marca. Incluye: texto de impacto máximo 7 palabras, indicador o logo de marca, y elemento visual que genere deseo (textura, destellos, contexto de consumo o ingredientes del producto).\n\n2. HISTORIA / REEL COVER (9:16 vertical)\nVersión adaptada para Story o portada de Reel. Mismo lenguaje visual que el post principal pero optimizado para pantalla vertical: texto en zona segura (no en los bordes superiores ni inferiores), área visual centrada, jerarquía clara.\n\n3. VARIANTE CON COPY PROMOCIONAL\nUna variante del post principal que incluya un mensaje de oferta o llamada a la acción: 'Disponible ahora', 'Solo esta semana', 'Pídelo con tu promotor', o el copy que aplique al contexto definido.\n\nPara cada pieza:\n— Propón la paleta de colores exacta en formato hex\n— Describe la tipografía sugerida (moderna / manuscrita / bold display)\n— Indica si el diseño va sobre fondo claro u oscuro y por qué\n— Da instrucciones breves sobre qué ajustar si se quiere una segunda versión\n\nPrimero presenta el Art Direction Brief completo de las 3 piezas para revisión y aprobación. Después de confirmar el brief, procede a crear las tres piezas visuales en Claude Design."}
+    }
+  ]
 },
 {
   id:4, slug:"sesion-4",
@@ -1214,6 +1291,8 @@ function renderSession(session){
         </div>
       </div>
     </div>
+
+    ${(session.ejercicios && session.ejercicios.length) ? `<div class="card" style="margin-top:24px;" id="ejerciciosCard"></div>` : ''}
   `;
 
   const slides = buildSessionSlides(session);
@@ -1222,6 +1301,62 @@ function renderSession(session){
   document.getElementById('presentSession').addEventListener('click', ()=> startPresentation(slides, session.titulo));
 
   renderQuizCard(session);
+  if(session.ejercicios && session.ejercicios.length) renderEjercicios(session);
+}
+
+/* ---------- Ejercicios aplicados ---------- */
+function renderEjercicios(session){
+  const el = document.getElementById('ejerciciosCard');
+  if(!el) return;
+  const items = session.ejercicios.map((ej,i)=>{
+    const pasos = (ej.pasos||[]).map(p=>`<li>${esc(p)}</li>`).join('');
+    const promptId = `ej-prompt-${session.id}-${i}`;
+    const promptBlock = ej.prompt ? `<div class="prompt-box">
+      <div class="prompt-header">
+        <span class="prompt-label">Prompt para copiar y pegar en Claude</span>
+        <button class="copy-btn" data-pid="${esc(promptId)}">Copiar</button>
+      </div>
+      <pre id="${esc(promptId)}" class="prompt-text">${esc(ej.prompt.texto)}</pre>
+    </div>` : '';
+    return `<div class="ejercicio-card">
+      <div class="ej-num">Ejercicio ${esc(String(ej.num||i+1))}</div>
+      <h4 class="ej-titulo">${esc(ej.titulo)}</h4>
+      ${ej.objetivo?`<p class="ej-objetivo">${esc(ej.objetivo)}</p>`:''}
+      <h5 class="ej-steps-label">Guía paso a paso</h5>
+      <ol class="ej-pasos">${pasos}</ol>
+      ${promptBlock}
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="section-title" style="margin-bottom:12px;"><span class="dot"></span><h3>Ejercicios aplicados</h3></div>
+    <p style="font-size:13px; color:var(--ink-soft); margin-bottom:20px;">Practica durante la sesión en vivo o en cualquier momento después. Cada ejercicio incluye una guía paso a paso y un prompt listo para usar en Claude.</p>
+    ${items}
+  `;
+
+  el.querySelectorAll('.copy-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const pid = btn.getAttribute('data-pid');
+      const pre = document.getElementById(pid);
+      if(!pre) return;
+      const txt = pre.textContent;
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(()=>{
+          btn.textContent='¡Copiado!'; btn.classList.add('copied');
+          setTimeout(()=>{ btn.textContent='Copiar'; btn.classList.remove('copied'); }, 2200);
+        }).catch(fallback);
+      } else { fallback(); }
+      function fallback(){
+        try{
+          const r=document.createRange(); r.selectNodeContents(pre);
+          const s=window.getSelection(); s.removeAllRanges(); s.addRange(r);
+          document.execCommand('copy'); s.removeAllRanges();
+          btn.textContent='¡Copiado!'; btn.classList.add('copied');
+          setTimeout(()=>{ btn.textContent='Copiar'; btn.classList.remove('copied'); }, 2200);
+        }catch(e){}
+      }
+    });
+  });
 }
 
 /* ---------- Quiz ---------- */
