@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Programa de Adopción de IA — KRAM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,7 +37,8 @@
   a{color:var(--verde);}
   img{max-width:100%; display:block;}
   button{font-family:inherit; cursor:pointer;}
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  @media (max-width:600px){.wrap{padding:0 18px;}}
 
   /* Topbar */
   .topbar{background:var(--card); border-bottom:1px solid var(--line);}
@@ -47,11 +49,13 @@
   .topbar .divider{width:1px; height:26px; background:var(--line);}
   .topbar .proginfo{text-align:right; font-size:12.5px; color:var(--ink-soft);}
   .topbar .proginfo strong{color:var(--navy); display:block; font-size:13.5px;}
+  .admin-corner-btn{background:var(--navy); color:#fff; border:none; padding:9px 16px; border-radius:8px; font-size:12.5px; font-weight:700; white-space:nowrap;}
+  .admin-corner-btn:hover{background:var(--navy-light);}
 
   /* Nav */
   nav.tabs{position:sticky; top:0; z-index:30; background:var(--navy); box-shadow:var(--shadow);}
-  nav.tabs .wrap{display:flex; gap:6px; overflow-x:auto; padding:0 20px;}
-  nav.tabs button{background:transparent; border:none; color:#C7CEDD; padding:14px 16px; font-size:13.5px; font-weight:600; white-space:nowrap; border-bottom:3px solid transparent; transition:.15s;}
+  nav.tabs .wrap{display:flex; flex-wrap:wrap; gap:4px; padding:6px 20px;}
+  nav.tabs button{background:transparent; border:none; color:#C7CEDD; padding:12px 15px; font-size:13.5px; font-weight:600; white-space:nowrap; border-bottom:3px solid transparent; border-radius:8px 8px 0 0; transition:.15s;}
   nav.tabs button:hover{color:#fff;}
   nav.tabs button.active{color:#fff; border-bottom-color:var(--dorado);}
   nav.tabs button .n{display:inline-block; background:rgba(255,255,255,.12); border-radius:6px; padding:1px 6px; margin-right:6px; font-size:11px;}
@@ -59,7 +63,8 @@
   main{min-height:60vh; padding:36px 0 70px 0;}
 
   /* Hero (home) */
-  .hero{background:linear-gradient(135deg,var(--navy) 0%, #1D2E52 60%, var(--navy-light) 100%); color:#fff; padding:52px 0 60px 0; margin-bottom:40px;}
+  .hero{background:linear-gradient(135deg,var(--navy) 0%, #1D2E52 60%, var(--navy-light) 100%); color:#fff; padding:44px 36px 48px 36px; margin-bottom:40px;}
+  @media (max-width:600px){.hero{padding:32px 20px;}}
   .hero h1{color:#fff; font-size:clamp(26px,4vw,38px); max-width:820px;}
   .hero p.lead{color:#D7DCE8; max-width:680px; font-size:16px;}
   .hero .pill{display:inline-block; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); color:#fff; font-size:12.5px; font-weight:600; padding:5px 12px; border-radius:100px; margin-bottom:16px;}
@@ -78,8 +83,12 @@
   .section-title{display:flex; align-items:center; gap:10px; margin-bottom:18px;}
   .section-title .dot{width:9px; height:9px; border-radius:50%; background:var(--verde);}
   .two-col{display:grid; grid-template-columns:1.6fr 1fr; gap:24px; align-items:start;}
+  .two-col>*{min-width:0;}
   @media (max-width:900px){.two-col{grid-template-columns:1fr;}}
-  .stack{display:flex; flex-direction:column; gap:20px;}
+  .stack{display:flex; flex-direction:column; gap:20px; min-width:0;}
+  .stack>*{min-width:0;}
+  .card, .slide-card{min-width:0;}
+  .slide-card p, .slide-card li, .ej-pasos li{overflow-wrap:anywhere;}
 
   /* Ladder */
   .ladder{display:grid; grid-template-columns:repeat(6,1fr); gap:8px;}
@@ -188,6 +197,155 @@
   footer a{color:#C7CEDD;}
 
   .sr-only{position:absolute; width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+
+  /* ---------------- Slide deck (contenido en modo diapositivas) ---------------- */
+  .deck-head{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; flex-wrap:wrap;}
+  .deck-head h3{margin:0;}
+  .btn-present{display:inline-flex; align-items:center; gap:8px; background:var(--navy); color:#fff; border:none; padding:10px 18px; border-radius:9px; font-weight:700; font-size:13.5px;}
+  .btn-present:hover{background:var(--navy-light);}
+  .btn-present svg{width:15px; height:15px;}
+
+  .slide-stack{display:flex; flex-direction:column; gap:16px;}
+  .slide-card{border:1px solid var(--line); border-radius:12px; padding:24px 26px; background:#FDFDFC;}
+  .slide-card .stag{font-size:11px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--verde); margin-bottom:8px;}
+  .slide-card h3{font-size:18px; margin-bottom:12px;}
+  .slide-card p, .slide-card ul{font-size:14.5px; color:#333A44;}
+  .slide-card li{margin-bottom:4px;}
+  .slide-card .video-note{margin-top:8px;}
+  .example-box{background:var(--verde-light); border:1px solid #BFE0D2; border-left:4px solid var(--verde); border-radius:8px; padding:14px 16px; margin-top:14px;}
+  .example-box .ex-tag{font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:var(--verde); margin-bottom:6px;}
+  .example-box p{margin:0; font-size:13.5px; color:#25453A;}
+  .present-slide .example-box{background:rgba(31,122,92,.16); border-color:rgba(31,122,92,.4);}
+  .present-slide .example-box p{color:#DCE9E3;}
+
+  /* icono decorativo + recuadro "punto clave" — le dan más textura visual a las slides de puro texto */
+  .c-icon{display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:10px; background:var(--verde-light); color:var(--verde); margin-bottom:12px;}
+  .c-icon svg{width:20px; height:20px;}
+  .present-slide .c-icon{background:rgba(255,255,255,.08); color:var(--dorado);}
+  .clave-box{background:#FBF3E8; border:1px solid #EAD3AC; border-left:4px solid var(--dorado); border-radius:8px; padding:14px 16px; margin-top:14px; display:flex; gap:10px; align-items:flex-start;}
+  .clave-box .cl-mark{flex:0 0 auto; width:20px; height:20px; color:var(--dorado); margin-top:1px;}
+  .clave-box .cl-mark svg{width:20px; height:20px;}
+  .clave-box .cl-body .cl-tag{font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:var(--dorado); margin-bottom:4px;}
+  .clave-box .cl-body p{margin:0; font-size:13.5px; color:#4A3319; font-weight:600; line-height:1.5;}
+  .present-slide .clave-box{background:rgba(200,127,42,.18); border-color:rgba(200,127,42,.45);}
+  .present-slide .clave-box .cl-body p{color:#F3DDBB;}
+
+  .claude-mark{display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:7px; background:#D97757; flex:0 0 auto;}
+  .claude-mark svg{width:13px; height:13px;}
+  .claude-chip{display:inline-flex; align-items:center; gap:7px; background:#FBEDE7; color:#A6472C; font-weight:700; font-size:12px; padding:4px 11px 4px 6px; border-radius:100px; margin-bottom:10px;}
+  .claude-chip .claude-mark{width:18px; height:18px; border-radius:6px;}
+  .claude-chip .claude-mark svg{width:10px; height:10px;}
+
+  /* timeline slide */
+  .timeline{display:flex; flex-direction:column; margin-top:6px;}
+  .timeline .t-item{display:flex; gap:16px; position:relative; padding-bottom:20px;}
+  .timeline .t-item:last-child{padding-bottom:0;}
+  .timeline .t-item .t-rail{display:flex; flex-direction:column; align-items:center; flex:0 0 auto;}
+  .timeline .t-item .t-dot{width:11px; height:11px; border-radius:50%; background:var(--verde); border:2px solid #fff; box-shadow:0 0 0 2px var(--verde); margin-top:4px;}
+  .timeline .t-item .t-line{flex:1; width:2px; background:var(--line); margin-top:4px;}
+  .timeline .t-item:last-child .t-line{display:none;}
+  .timeline .t-year{font-family:'Archivo',sans-serif; font-weight:800; color:var(--verde); font-size:13.5px; min-width:64px;}
+  .timeline .t-body{padding-bottom:2px;}
+  .timeline .t-body h5{margin:0 0 3px 0; font-size:14px; color:var(--navy);}
+  .timeline .t-body p{margin:0; font-size:13px; color:var(--ink-soft);}
+
+  /* tiers slide (familia de modelos Claude) */
+  .tiers-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:14px;}
+  @media (max-width:800px){.tiers-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:480px){.tiers-grid{grid-template-columns:1fr;}}
+  .tier-card{border:1px solid var(--line); border-radius:11px; padding:16px 14px; background:#fff;}
+  .tier-card h5{font-family:'Archivo',sans-serif; font-size:15px; margin:0 0 6px 0; color:var(--navy);}
+  .tier-card p{font-size:12px; color:var(--ink-soft); margin:0;}
+  .tier-card.highlight{background:var(--verde-light); border-color:#BFE0D2;}
+  .tier-card.highlight h5{color:var(--verde);}
+  .tier-card .tpill{display:inline-block; font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; background:var(--verde); color:#fff; padding:2px 8px; border-radius:100px; margin-bottom:8px;}
+
+  /* cover slide (Inicio) */
+  .cover-slide{text-align:left;}
+  .cover-slide h2{font-size:clamp(22px,3vw,30px); margin-bottom:10px;}
+  .cover-slide p{font-size:14.5px; color:#333A44;}
+
+  /* video facade */
+  .video-facade{position:relative; cursor:pointer; border-radius:10px; overflow:hidden; background:#0B1220; aspect-ratio:16/9;}
+  .video-facade img{width:100%; height:100%; object-fit:cover; display:block; opacity:.85;}
+  .video-facade .playbtn{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:64px; height:64px; border-radius:50%; background:rgba(178,58,50,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,.35);}
+  .video-facade .playbtn svg{width:22px; height:22px; margin-left:3px;}
+  .video-facade:hover .playbtn{background:var(--rojo);}
+  .video-facade .video-chip{position:absolute; right:10px; bottom:10px; background:rgba(11,18,32,.88); color:#fff; font-size:11px; font-weight:700; padding:5px 9px; border-radius:999px; letter-spacing:.01em;}
+  .video-external-link{display:inline-block; margin-top:8px; font-size:12.5px; font-weight:700; color:var(--verde);}
+  .video-external-link:hover{text-decoration:underline;}
+  .present-slide .video-external-link{color:#8FE0BE;}
+
+  /* tabla dentro de una slide de contenido (ej. versiones de modelos Claude) */
+  .content-table-wrap{overflow-x:auto; margin-top:14px; border:1px solid var(--line); border-radius:10px;}
+  .content-table{width:100%; border-collapse:collapse; font-size:13px;}
+  .content-table th{background:#F3F2EE; text-align:left; padding:9px 12px; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; color:var(--ink-soft); border-bottom:1px solid var(--line);}
+  .content-table td{padding:10px 12px; border-bottom:1px solid var(--line); color:#333A44; vertical-align:top;}
+  .content-table tr:last-child td{border-bottom:none;}
+  .present-slide .content-table-wrap{border-color:rgba(255,255,255,.16);}
+  .present-slide .content-table th{background:rgba(255,255,255,.06); color:#B8C0D6; border-bottom-color:rgba(255,255,255,.16);}
+  .present-slide .content-table td{color:#DCE1EE; border-bottom-color:rgba(255,255,255,.1); font-size:clamp(13px,1.3vw,15px);}
+
+  /* Presentation mode overlay */
+  .present-overlay{position:fixed; inset:0; background:var(--navy); z-index:1000; display:flex; flex-direction:column; color:#fff;}
+  .present-top{display:flex; align-items:center; justify-content:space-between; padding:16px 28px; flex:0 0 auto;}
+  .present-top .ptag{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#9AA6C2;}
+  .present-lcg-logo{height:18px; width:auto; opacity:.9;}
+  .present-close{background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); color:#fff; padding:8px 16px; border-radius:8px; font-size:13px; font-weight:600;}
+  .present-close:hover{background:rgba(255,255,255,.2);}
+  .present-body{flex:1 1 auto; display:flex; align-items:center; justify-content:center; padding:20px 60px; overflow:auto;}
+  .present-slide{max-width:900px; width:100%;}
+  .present-slide .stag{color:var(--dorado); font-size:12.5px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; margin-bottom:14px;}
+  .present-slide h2{color:#fff; font-size:clamp(24px,3.6vw,40px); margin-bottom:18px;}
+  .present-slide p{color:#DCE1EE; font-size:clamp(15px,1.6vw,19px); line-height:1.6;}
+  .present-slide ul{color:#DCE1EE; font-size:clamp(15px,1.6vw,19px); line-height:1.7; padding-left:24px;}
+  .present-slide .timeline .t-year{color:var(--dorado);}
+  .present-slide .timeline .t-body h5{color:#fff;}
+  .present-slide .timeline .t-body p{color:#B8C0D6; font-size:14.5px;}
+  .present-slide .tier-card{background:rgba(255,255,255,.04); border-color:rgba(255,255,255,.14);}
+  .present-slide .tier-card h5{color:#fff;}
+  .present-slide .tier-card p{color:#B8C0D6;}
+  .present-slide .tier-card.highlight{background:rgba(31,122,92,.22); border-color:rgba(31,122,92,.5);}
+  .present-slide .tier-card.highlight h5{color:#6FD3AE;}
+  .present-slide .agenda .item{border-bottom-color:rgba(255,255,255,.12);}
+  .present-slide .agenda .time{color:var(--dorado);}
+  .present-slide .agenda .txt h5{color:#fff;}
+  .present-slide .agenda .txt p{color:#B8C0D6;}
+  .present-slide .claude-chip{background:rgba(217,119,87,.18); color:#F0A283;}
+  .present-slide .rung{background:rgba(255,255,255,.04); border-color:rgba(255,255,255,.14);}
+  .present-slide .rung .num{color:#8D97B2;}
+  .present-slide .rung h5{color:#fff;}
+  .present-slide .rung p{color:#B8C0D6;}
+  .present-slide .rung.covered{background:rgba(31,122,92,.22); border-color:rgba(31,122,92,.5);}
+  .present-slide .rung.covered .num{color:#6FD3AE;}
+  .present-slide .rung.touch{background:rgba(200,127,42,.2); border-color:rgba(200,127,42,.5);}
+  .present-slide .rung.touch .num{color:var(--dorado);}
+  .present-slide .rung.preview{background:rgba(255,255,255,.02); border-style:dashed;}
+  .present-bottom{flex:0 0 auto; display:flex; align-items:center; justify-content:center; gap:18px; padding:18px 28px 26px 28px;}
+  .present-nav-btn{background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); color:#fff; width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px;}
+  .present-nav-btn:hover{background:rgba(255,255,255,.2);}
+  .present-nav-btn:disabled{opacity:.3;}
+  .present-dots{display:flex; gap:7px;}
+  .present-dots .pd{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.25);}
+  .present-dots .pd.active{background:var(--dorado); width:22px; border-radius:5px;}
+  .present-counter{color:#9AA6C2; font-size:12.5px; min-width:52px; text-align:center;}
+
+  /* Ejercicios aplicados */
+  .ejercicio-card{border:1px solid var(--line); border-left:4px solid var(--verde); border-radius:10px; padding:18px 20px 16px; margin-bottom:18px;}
+  .ejercicio-card:last-child{margin-bottom:0;}
+  .ej-num{font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--verde); margin-bottom:5px;}
+  .ej-titulo{font-size:15px; font-weight:700; margin:0 0 8px 0; color:var(--ink);}
+  .ej-objetivo{font-size:13px; color:var(--ink-soft); margin:0 0 14px 0; line-height:1.55;}
+  .ej-steps-label{font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink-soft); margin:0 0 7px 0;}
+  .ej-pasos{margin:0 0 16px 0; padding-left:20px;}
+  .ej-pasos li{font-size:13.5px; margin-bottom:7px; line-height:1.55;}
+  .prompt-box{background:var(--surface); border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  .prompt-header{display:flex; align-items:center; justify-content:space-between; padding:9px 14px; background:var(--verde);}
+  .prompt-label{font-size:12px; font-weight:700; color:#fff;}
+  .copy-btn{background:rgba(255,255,255,.22); border:1px solid rgba(255,255,255,.4); color:#fff; font-size:11.5px; font-weight:700; padding:4px 13px; border-radius:5px; cursor:pointer; transition:.15s;}
+  .copy-btn:hover{background:rgba(255,255,255,.38);}
+  .copy-btn.copied{background:#fff; color:var(--verde);}
+  .prompt-text{margin:0; padding:14px 16px; font-family:inherit; font-size:12.5px; line-height:1.65; white-space:pre-wrap; color:var(--ink); max-height:280px; overflow-y:auto;}
 </style>
 </head>
 <body>
@@ -203,6 +361,7 @@
       <strong>Programa de Adopción de IA</strong>
       Preparado para KRAM · IMPULSA / London Consulting Group
     </div>
+    <button class="admin-corner-btn" data-go="#admin">Panel Admin</button>
   </div>
 </header>
 
@@ -220,21 +379,24 @@
 /* =========================================================================
    CONFIGURACIÓN — edita estos valores antes de publicar
    ========================================================================= */
+const LCG_LOGO_LIGHT = "data:image/webp;base64,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"; // logo de London Consulting Group en blanco, para fondos oscuros (modo presentación)
+
 const CONFIG = {
-  SUPABASE_URL: "https://TU-PROYECTO.supabase.co",       // TODO: reemplazar con la URL de tu proyecto Supabase
-  SUPABASE_ANON_KEY: "TU-SUPABASE-ANON-KEY-AQUI",          // TODO: reemplazar con la anon/public key de tu proyecto
+  SUPABASE_URL: "https://oeivskzccesydprbdcjp.supabase.co",       // proyecto Supabase KRAM — conectado
+  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9laXZza3pjY2VzeWRwcmJkY2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3ODgwNTksImV4cCI6MjEwMzM2NDA1OX0.BD4gwxJC3le-jlbWvAt8gpNpi-NZ9lDhnfJg7QpeQJI",          // anon/public key del proyecto KRAM
   ADMIN_PASSCODE: "kram-impulsa-2026",                     // TODO: cambia esta clave antes de publicar
+  EXCEPTION_CODE: "kram-excepcion-2026",                   // TODO: cámbiala cuando quieras; sirve para generar links de excepción (ver más abajo)
   SESSION_DURATION_MIN: 65,
   QUIZ_WINDOW_HOURS: 24,
   // Fecha y hora de inicio de cada sesión en vivo (zona horaria Ciudad de México).
   // El quiz de cada sesión se ABRE justo al terminar la sesión (fecha + 65 min)
   // y se CIERRA 24 horas después. Ajusta estas fechas a tu calendario real.
   SESSION_DATES: [
-    "2026-09-01T09:00:00-06:00",
-    "2026-09-08T09:00:00-06:00",
-    "2026-09-15T09:00:00-06:00",
-    "2026-09-29T09:00:00-06:00",
-    "2026-10-06T09:00:00-06:00"
+    "2026-09-01T10:30:00-06:00",
+    "2026-09-08T10:30:00-06:00",
+    "2026-09-15T10:30:00-06:00",
+    "2026-09-29T10:30:00-06:00",
+    "2026-10-06T10:30:00-06:00"
   ]
 };
 
@@ -256,7 +418,7 @@ const LADDER = [
   {n:2, nombre:"Prompting estructurado", desc:"Instrucciones con contexto, rol y formato. Se guarda contexto reutilizable en Proyectos."},
   {n:3, nombre:"Claude Design", desc:"Se crean piezas visuales editables: fichas, exhibidores, gráficos, reportes."},
   {n:4, nombre:"Skills reutilizables", desc:"Instrucciones guardadas que repiten una tarea siempre de la misma forma."},
-  {n:5, nombre:"Plugins y conectores", desc:"La IA se conecta directo a Drive, correo, calendario y otras herramientas de trabajo."},
+  {n:5, nombre:"Plugins y conectores", desc:"La IA se conecta directo a Drive, correo, calendario y otras herramientas, y ejecuta tareas programadas que corren solas."},
   {n:6, nombre:"Agentes punta a punta", desc:"Pasos encadenados sin intervenir en cada uno, con supervisión humana en los puntos clave. Es el horizonte, no el punto de partida de este programa."}
 ];
 
@@ -280,33 +442,68 @@ const SESSIONS = [
     {t:5,  titulo:"Cierre", desc:"Cómo y cuándo resolver el quiz en casa."}
   ],
   contenido:[
-    {h:"¿Por qué esto importa para KRAM?", p:[
-      "En KRAM ya se usa inteligencia artificial todos los días, aunque sea de forma informal: alguien que le pide a ChatGPT ayuda para redactar un correo o resumir un reporte. Este programa no parte de cero — parte de ahí, y lo convierte en una forma de trabajo consistente para todo el equipo de Promotoría y CEDIS."
-    ]},
-    {h:"De las reglas fijas a la IA generativa", p:[
-      "La inteligencia artificial no nació ayer. Empezó con sistemas de reglas fijas (\"si pasa X, haz Y\"), luego aprendió a encontrar patrones en datos (Machine Learning), después a reconocer imágenes y voz con más profundidad (Deep Learning), y hoy puede generar texto, imágenes y código nuevos (IA Generativa). El siguiente paso, que apenas está arrancando, son los agentes: sistemas que no solo generan una respuesta, sino que actúan."
-    ]},
-    {h:"¿Qué es un LLM?", p:[
-      "LLM significa \"Large Language Model\", o Modelo de Lenguaje Grande. Es el motor detrás de Claude, ChatGPT y herramientas similares. En términos simples: es un modelo entrenado con enormes cantidades de texto que aprendió a predecir, palabra por palabra, cuál es la continuación más probable de lo que le estás escribiendo. No \"sabe\" las cosas como una persona; reconoce patrones de lenguaje con muchísima precisión."
-    ]},
-    {h:"¿Qué es un token?", p:[
-      "Un token es la unidad mínima de texto que el modelo procesa: puede ser una palabra completa, parte de una palabra o un signo de puntuación. Una palabra como \"Promotoría\" puede dividirse en más de un token. Esto importa porque el costo, la velocidad y la cantidad de información que un modelo puede manejar de una sola vez se miden en tokens, no en palabras."
-    ]},
-    {h:"El prompt: la instrucción que le das a la IA", p:[
-      "El prompt es simplemente lo que le escribes al modelo. Un prompt vago (\"hazme un resumen\") da resultados vagos. Un prompt con contexto, rol y formato deseado da resultados útiles. En las próximas sesiones vamos a practicar esto con ejemplos reales de Promotoría y CEDIS."
-    ]},
-    {h:"La escalera de niveles de conocimiento de Claude", p:[
-      "A lo largo de este programa vamos a subir, peldaño a peldaño, por una escalera de seis niveles. Hoy, la mayoría del equipo está en el Nivel 1: usar el chat de forma suelta. Estas cinco sesiones los llevan de forma práctica hasta el Nivel 5. El Nivel 6 —agentes trabajando de principio a fin— lo vamos a ver como demostración en la última sesión, para que tengan el mapa completo. Es importante que quede claro: este programa deja al equipo en un nivel básico-intermedio, no en el Nivel 6."
-    ]}
+    {h:"¿Por qué esto importa para KRAM?", icon:"lightbulb", p:[
+      "En KRAM ya se usa inteligencia artificial todos los días, aunque sea de forma informal: alguien que le pide a ChatGPT ayuda para redactar un correo o resumir un reporte. Este programa no parte de cero — parte de ahí, y lo convierte en una forma de trabajo consistente para el personal de KRAM seleccionado para este programa.",
+      "Comercializadora KRAM vive de decisiones rápidas y repetitivas: revisar qué se vendió en una tienda, redactar un reporte para un supervisor, resumir lo que reportó un cliente, decidir qué producto reponer primero, describir una incidencia de inventario. Cada una de esas tareas se puede apoyar con IA — no para reemplazar el criterio de quien la hace, sino para llegar a la decisión invirtiendo menos tiempo en juntar y ordenar información.",
+      "Este programa parte de una premisa simple: no hace falta ser programador ni \"de sistemas\" para usar bien la IA. Es, ante todo, una herramienta de lenguaje. Si sabes explicarle una tarea a una persona nueva en el equipo, ya tienes recorrida buena parte del camino para saber pedírsela a un modelo de IA."
+    ], clave:"No se trata de reemplazar el criterio de nadie: se trata de llegar a la misma decisión invirtiendo menos tiempo en juntar y ordenar información."},
+    {h:"De las reglas fijas a la IA generativa", icon:"forward", p:[
+      "La inteligencia artificial no nació ayer. Empezó con sistemas de reglas fijas (\"si pasa X, haz Y\"), luego aprendió a encontrar patrones en datos (Machine Learning), después a reconocer imágenes y voz con más profundidad (Deep Learning), y hoy puede generar texto, imágenes y código nuevos (IA Generativa). El siguiente paso, que apenas está arrancando, son los agentes: sistemas que no solo generan una respuesta, sino que actúan.",
+      "Para dimensionarlo con un ejemplo cercano: un sistema de reglas fijas es como una alarma de tienda que suena si un sensor detecta que algo cruzó la puerta sin pasar por caja — siempre la misma regla, sin importar el contexto. El Machine Learning es más parecido a un sistema que, después de ver miles de tickets de venta históricos, aprende a estimar qué producto es más probable que se agote esta semana en una tienda determinada — encuentra el patrón, pero solo entrega un número o una categoría. La IA generativa —la que usamos en este programa— va un paso más allá: no solo predice, puede redactar el reporte completo, generar la imagen de un exhibidor o proponer el texto de un mensaje para un supervisor, a partir de una instrucción en lenguaje natural.",
+      "El siguiente escalón — los agentes, que además de generar contenido pueden usar herramientas y actuar por varios pasos — es el tema central de la Sesión 2."
+    ], clave:"Reglas fijas → Machine Learning → IA generativa → Agentes: cada escalón puede hacer más de forma independiente. Los agentes son el tema de la Sesión 2."},
+    {h:"¿Qué es un LLM?", icon:"cpu", p:[
+      "LLM significa \"Large Language Model\", o Modelo de Lenguaje Grande. Es el motor detrás de Claude, ChatGPT y herramientas similares. En términos simples: es un modelo entrenado con enormes cantidades de texto que aprendió a predecir, palabra por palabra, cuál es la continuación más probable de lo que le estás escribiendo. No \"sabe\" las cosas como una persona; reconoce patrones de lenguaje con muchísima precisión.",
+      "Una forma útil de imaginarlo: es como si hubiera leído una cantidad casi inimaginable de texto —libros, manuales, artículos, conversaciones— y, a partir de esa lectura, se volvió excelente prediciendo qué palabra sigue de forma coherente con el estilo, el tema y el contexto que le diste. De ahí se desprenden dos consecuencias prácticas para el día a día: primero, entre más claro y completo sea el contexto que le das, mejor va a ser su respuesta — por eso importa cómo se pide algo, no solo qué se pide. Segundo, un LLM puede \"sonar\" muy seguro de sí mismo incluso cuando se equivoca (a esto se le suele llamar una \"alucinación\"): cualquier dato crítico —una cifra de venta, el nombre exacto de un producto, una fecha de vigencia— siempre debe verificarse contra la fuente original antes de usarse para tomar una decisión."
+    ], clave:"Un LLM predice texto con muchísima precisión, pero puede sonar seguro incluso al equivocarse — todo dato crítico se verifica contra la fuente."},
+    {h:"¿Qué es un token?", icon:"hash", p:[
+      "Un token es la unidad mínima de texto que el modelo procesa: puede ser una palabra completa, parte de una palabra o un signo de puntuación. Una palabra como \"Promotoría\" puede dividirse en más de un token. Esto importa porque el costo, la velocidad y la cantidad de información que un modelo puede manejar de una sola vez se miden en tokens, no en palabras.",
+      "Como referencia práctica: una palabra corta y común suele ser un solo token, mientras que una palabra larga o poco frecuente —el nombre de una marca poco común, por ejemplo— puede dividirse en dos o tres. Esto tiene dos implicaciones para el uso diario. Primero, cuando pegas un documento muy largo (un reporte de venta de varias tiendas, por ejemplo) estás usando muchos tokens de una sola vez, y todo modelo tiene un límite de tokens que puede procesar en una sola conversación. Segundo, si una conversación se alarga demasiado, el modelo puede empezar a \"perder de vista\" el contexto del inicio — por eso conviene ser conciso y, cuando el tema cambie por completo, abrir una conversación nueva en lugar de seguir acumulando todo en la misma."
+    ], clave:"Los tokens miden cuánto texto puede procesar el modelo a la vez: sé conciso y abre una conversación nueva cuando cambie el tema."},
+    {h:"El prompt: la instrucción que le das a la IA", icon:"chat", p:[
+      "El prompt es simplemente lo que le escribes al modelo. Un prompt vago (\"hazme un resumen\") da resultados vagos. Un prompt con contexto, rol y formato deseado da resultados útiles.",
+      "Piensa en el prompt como el equivalente a darle una instrucción de trabajo a una persona nueva en el equipo: entre más contexto, ejemplos y formato esperado le des, menos tiempo vas a invertir corrigiendo el resultado después. En las próximas sesiones vamos a practicar esto con ejemplos reales de Comercializadora KRAM."
+    ], ejemplo:{titulo:"Antes y después de un prompt", texto:"Débil: \"Hazme un resumen de ventas.\" — Mejor: \"Actúa como analista de Promotoría. Con base en este reporte de venta semanal de 5 tiendas [adjunto], dime cuáles 3 tiendas tuvieron la mayor caída de venta contra la semana anterior, y entrégamelo en una tabla de 3 columnas: tienda, % de caída, posible causa.\""}},
+    {h:"La escalera de niveles de conocimiento de Claude", icon:"stairs", p:[
+      "A lo largo de este programa vamos a subir, peldaño a peldaño, por una escalera de seis niveles que sirve como mapa de referencia. Hoy, la mayoría del equipo está en el Nivel 1: usar el chat de forma suelta. Estas cinco sesiones los llevan de forma práctica hasta el Nivel 5.",
+      "El Nivel 6 —agentes trabajando de principio a fin— no es parte del entrenamiento práctico de este programa: se menciona brevemente en la última sesión únicamente como contexto, para que el equipo entienda hacia dónde puede evolucionar la industria a futuro. Es importante que quede claro: este programa capacita al equipo hasta un nivel básico-intermedio (Niveles 1 a 5), no hasta el Nivel 6.",
+      "En la próxima sesión bajamos un peldaño más concreto: qué es exactamente un agente, en qué se diferencia de simplemente chatear con un modelo, y por qué la distinción entre \"automatización\" y \"autonomía\" es la más importante que vas a aprender en todo el programa."
+    ], clave:"Este programa capacita del Nivel 1 al Nivel 5 de forma práctica. El Nivel 6 se menciona solo como referencia — no es una meta de este programa."},
+    {h:"Las versiones de los modelos de Claude", icon:"layers", p:[
+      "Claude no es un solo modelo: es una familia de modelos con distintos niveles de capacidad, velocidad y costo. Elegir el modelo correcto para cada tarea es, en sí mismo, una habilidad práctica — usar siempre el más potente no es lo más eficiente, ni tampoco lo más rápido.",
+      "La tabla siguiente resume la familia actual y, de forma orientativa, qué tan intensivo es el uso de tokens de cada uno (a mayor capacidad de razonamiento, generalmente mayor consumo de tokens por respuesta, y por lo tanto más costo y más tiempo de espera)."
+    ], tabla:{
+      headers:["Modelo", "Para qué sirve", "Intensidad de uso de tokens"],
+      rows:[
+        ["Claude Haiku", "Tareas simples, rápidas y de alto volumen: clasificar, resumir textos cortos, respuestas inmediatas.", "Baja"],
+        ["Claude Sonnet", "El balance por defecto: la gran mayoría del trabajo diario de análisis, redacción y reportes.", "Media"],
+        ["Claude Opus", "Trabajo agéntico complejo y tareas más exigentes de análisis o código.", "Alta"],
+        ["Claude Fable", "El nivel más capaz: razonamiento profundo y agentes de larga duración, para los problemas más demandantes.", "Muy alta"]
+      ]
+    }, clave:"A mayor capacidad del modelo, generalmente mayor uso de tokens: usa el nivel más alto solo cuando la tarea realmente lo exija."},
+    {h:"Caso aplicado real: la minuta de la junta semanal para el CEO", icon:"chat", p:[
+      "Un caso muy común en cualquier puesto administrativo: después de la junta semanal, alguien tiene que convertir las notas —muchas veces desordenadas— en una minuta clara, con acuerdos y responsables, lista para enviarse al CEO. Este es un ejemplo de principio a fin de cómo resolverlo con Claude, pensado para que el resultado se pueda copiar y pegar directo en el cuerpo de un correo."
+    ], ul:[
+      "Reúne tus notas de la junta (a mano, grabación transcrita, o notas sueltas del chat) — no necesitan estar ordenadas; cópialas y pégalas tal cual en la conversación con Claude.",
+      "Dale contexto y rol: indícale que actúe como tu asistente de dirección, que la minuta es para el CEO de Comercializadora KRAM, y qué información no puede faltar (fecha, asistentes, acuerdos, responsable de cada acuerdo, fecha compromiso).",
+      "Pide el formato exacto de salida: un resumen ejecutivo de 3 o 4 líneas al inicio, seguido de una tabla con columnas Acuerdo, Responsable y Fecha compromiso.",
+      "Revisa el resultado contra tus notas originales — cualquier nombre, cifra o fecha crítica se verifica antes de enviarla, como vimos antes en esta misma sesión.",
+      "Copia el resultado y pégalo directo en el cuerpo de tu correo al CEO — si le pediste el formato correcto desde el prompt, no hace falta reacomodar nada."
+    ], ejemplo:{titulo:"Prompt listo para copiar y pegar", texto:"\"Actúa como mi asistente de dirección. Aquí están mis notas de la junta semanal de Comercializadora KRAM del [fecha] [pega tus notas]. Redacta una minuta ejecutiva para el CEO con: 1) un resumen de 3 líneas del estado general, 2) una tabla con columnas Acuerdo, Responsable y Fecha compromiso, y 3) los pendientes de la semana anterior que sigan abiertos. Usa un tono formal y directo, listo para copiar y pegar en el cuerpo de un correo.\""}}
   ],
-  video:{id:"S-GLjLdbEwo", titulo:"¿Qué es un LLM (o Gran Modelo de Lenguaje)?", nota:"Video corto (formato Short) en español — buena introducción visual al concepto de LLM."},
+  videos:[
+    {id:"0Ms1phL58yA", embed:false, titulo:"Video complementario de la Sesión 1 (1 de 2)", nota:null},
+    {id:"22yfHdwg0uc", titulo:"Video complementario de la Sesión 1 (2 de 2)", nota:null}
+  ],
   quiz:[
     {q:"¿Qué es un LLM (Large Language Model)?", opts:["Un tipo de base de datos","Un modelo entrenado con grandes cantidades de texto para predecir la siguiente palabra","Un robot físico","Un lenguaje de programación"], correct:1},
     {q:"Un \"token\" es principalmente:", opts:["Una contraseña de acceso","Un fragmento de texto (palabra o parte de ella) que el modelo procesa","Un tipo de virus informático","Una moneda digital"], correct:1},
     {q:"La IA generativa se diferencia del Machine Learning tradicional porque:", opts:["No usa datos","Puede crear contenido nuevo (texto, imágenes, etc.) en vez de solo clasificar o predecir un número","Es más antigua","No requiere entrenamiento"], correct:1},
     {q:"¿Cuál de estas afirmaciones es correcta sobre cómo \"piensa\" un LLM?", opts:["Comprende el mundo igual que un humano","Predice la palabra más probable que sigue, en base a patrones aprendidos","Consulta internet en tiempo real siempre","Memoriza respuestas exactas para cada pregunta"], correct:1},
     {q:"Un \"prompt\" es:", opts:["Un error del sistema","La instrucción o pregunta que le damos a la IA","El nombre del modelo","Un tipo de token"], correct:1},
-    {q:"Según la escalera de niveles vista en esta sesión, ¿en qué nivel está hoy la mayoría del equipo de KRAM?", opts:["Nivel 5: Plugins y conectores","Nivel 1: Chat básico","Nivel 3: Claude Design","Nivel 6: Agentes punta a punta"], correct:1}
+    {q:"Según la escalera de niveles vista en esta sesión, ¿en qué nivel está hoy la mayoría del equipo de KRAM?", opts:["Nivel 5: Plugins y conectores","Nivel 1: Chat básico","Nivel 3: Claude Design","Nivel 6: Agentes punta a punta"], correct:1},
+    {q:"Según la tabla de modelos de Claude vista en esta sesión, ¿qué modelo representa el balance por defecto para la mayoría del trabajo diario?", opts:["Claude Haiku","Claude Sonnet","Claude Opus","Claude Fable"], correct:1},
+    {q:"En el caso aplicado de la minuta para el CEO, ¿qué se debe hacer antes de copiar el resultado en el correo?", opts:["Cambiar el idioma del texto","Verificar los datos contra las notas originales de la junta","Borrar el resumen ejecutivo","Nada, se envía directo sin revisar"], correct:1}
   ],
   entregable:null
 },
@@ -326,33 +523,66 @@ const SESSIONS = [
     {t:5,  titulo:"Cierre", desc:"Instrucciones del quiz."}
   ],
   contenido:[
-    {h:"Automatización vs. autonomía", p:[
-      "Una automatización sigue un guion fijo: si ocurre A, siempre hace B, sin importar el contexto. Un agente autónomo, en cambio, evalúa la situación y decide qué hacer en el momento, dentro de los límites que tú definiste. Confundir estos dos términos es de los errores más comunes en el mercado — y es clave distinguirlos antes de hablar de \"agentes\"."
-    ]},
-    {h:"¿Qué es un agente de IA?", p:[
-      "Un agente es un sistema que puede usar herramientas (buscar información, leer un archivo, escribir en una hoja de cálculo) para completar una tarea de varios pasos, no solo para responder una pregunta. Un chat normal conversa contigo; un agente actúa por ti, dentro de las reglas que le diste."
-    ]},
-    {h:"Contexto y memoria: por qué \"recordar\" importa", p:[
-      "Cada modelo tiene una \"ventana de contexto\": la cantidad de información que puede tener presente en una conversación. Guardar el contexto de KRAM (marcas, estructura de Promotoría, formatos de reporte) en un Proyecto de Claude evita tener que explicarlo desde cero cada vez que alguien lo usa."
-    ]},
-    {h:"Claude vs. el chat que ya usan", p:[
-      "Claude y ChatGPT son la misma familia de tecnología (LLMs), y quienes en el equipo ya usan IA en su día a día no están partiendo de cero. La diferencia práctica que vamos a explotar en este programa está en cómo Claude organiza el contexto de largo plazo (Proyectos), cómo genera piezas visuales editables (Claude Design, Sesión 3) y cómo se conecta a herramientas de trabajo (Sesión 4)."
-    ]},
-    {h:"Cómo armar un buen prompt", p:[
-      "Un buen prompt casi siempre tiene cuatro partes: contexto (qué información relevante le das), rol (desde qué perspectiva quieres la respuesta), tarea (qué necesitas exactamente) y formato (cómo quieres el resultado)."
+    {h:"Automatización vs. autonomía", icon:"shuffle", p:[
+      "Una automatización sigue un guion fijo: si ocurre A, siempre hace B, sin importar el contexto. Un agente autónomo, en cambio, evalúa la situación y decide qué hacer en el momento, dentro de los límites que tú definiste. Confundir estos dos términos es de los errores más comunes en el mercado — y es clave distinguirlos antes de hablar de \"agentes\".",
+      "Un ejemplo del día a día de KRAM ayuda a fijar la idea: una automatización sería \"si el inventario de una tienda baja de 10 piezas, envía siempre el mismo correo de reabastecimiento\" — pase lo que pase, ese es el único camino posible. Un agente autónomo, en cambio, podría revisar el inventario, cruzarlo contra el histórico de venta de esa tienda en particular, considerar si hay una promoción activa esa semana, y decidir si conviene reabastecer, esperar, o avisar a un supervisor primero — todo dentro de reglas que una persona definió de antemano.",
+      "Ninguna de las dos es \"mejor\" en abstracto: la automatización es más predecible y más fácil de auditar; la autonomía es más flexible pero exige más cuidado en cómo se supervisa. Este programa no busca que el equipo construya agentes complejos — busca que entiendan la diferencia para usar bien las herramientas que ya existen y para participar con criterio en decisiones futuras sobre este tema."
+    ], clave:"Automatización = mismo camino siempre. Autonomía = decide según el contexto, dentro de límites que tú defines."},
+    {h:"¿Qué es un agente de IA?", icon:"bolt", p:[
+      "Un agente es un sistema que puede usar herramientas (buscar información, leer un archivo, escribir en una hoja de cálculo) para completar una tarea de varios pasos, no solo para responder una pregunta. Un chat normal conversa contigo; un agente actúa por ti, dentro de las reglas que le diste.",
+      "La diferencia se nota en el resultado: si le pides a un chat normal \"dime cómo estructurar un reporte de venta semanal\", te va a explicar cómo hacerlo — pero tú tienes que ejecutarlo. Si un agente tiene acceso a la hoja de cálculo real y a la instrucción de generar el reporte, puede leer los datos, hacer los cálculos, redactar las conclusiones y entregarte el documento terminado, sin que tengas que copiar y pegar cada paso. Ese salto —de \"me explica qué hacer\" a \"lo hace\"— es exactamente lo que separa un asistente de un agente."
+    ], clave:"Un chat te explica qué hacer; un agente lo hace por ti, dentro de las reglas que le diste."},
+    {h:"Contexto y memoria: por qué \"recordar\" importa", icon:"layers", p:[
+      "Cada modelo tiene una \"ventana de contexto\": la cantidad de información que puede tener presente en una conversación. Guardar el contexto de KRAM (marcas, estructura de Promotoría, formatos de reporte) en un Proyecto de Claude evita tener que explicarlo desde cero cada vez que alguien lo usa.",
+      "Piénsalo como la diferencia entre explicarle la operación de KRAM a alguien por primera vez cada lunes, versus tener a alguien que ya conoce la estructura de supervisores, las cadenas con las que trabajan, y el formato de reporte que usa Jefatura — y que simplemente necesita los datos de esta semana para trabajar. Un Proyecto de Claude cumple ese segundo rol: uno lo configura una vez con el contexto que casi no cambia, y cada conversación nueva dentro de ese Proyecto ya parte de ahí."
+    ], clave:"Un Proyecto de Claude guarda el contexto de KRAM una sola vez, para no tener que reexplicarlo en cada conversación."},
+    {h:"Claude vs. el chat que ya usan", icon:"swap", p:[
+      "Claude y ChatGPT son la misma familia de tecnología (LLMs), y quienes en el equipo ya usan IA en su día a día no están partiendo de cero. La diferencia práctica que vamos a explotar en este programa está en cómo Claude organiza el contexto de largo plazo (Proyectos), cómo genera piezas visuales editables (Claude Design, Sesión 3) y cómo se conecta a herramientas de trabajo (Sesión 4).",
+      "En otras palabras: si alguien del equipo ya sabe pedirle cosas a ChatGPT, ese hábito no se pierde — se traslada. Lo que cambia es la profundidad de lo que se puede hacer sin salir de la conversación: guardar contexto que persiste entre sesiones, producir un documento visual terminado en vez de solo texto, y —más adelante— conectar la IA directamente a herramientas como el correo o Google Drive."
+    ], clave:"Ningún hábito se pierde al pasar de ChatGPT a Claude — se traslada, y gana profundidad con Proyectos, Claude Design y conectores."},
+    {h:"¿Qué es Cowork?", icon:"briefcase", p:[
+      "Cowork es el modo de Claude pensado para automatizar tareas de trabajo con archivos y proyectos completos, no solo para conversar. En vez de solo responder preguntas, dentro de Cowork Claude puede leer y escribir archivos, generar documentos y hojas de cálculo, usar herramientas conectadas (como los conectores que veremos en la Sesión 4), y ejecutar tareas de varios pasos de principio a fin.",
+      "Es la diferencia entre platicar con la IA sobre un reporte, y pedirle que te entregue el reporte terminado, con los archivos correctos y listos para usarse."
+    ], clave:"Cowork lleva a Claude de responder preguntas a producir y entregar el trabajo completo: archivos, documentos y tareas de varios pasos."},
+    {h:"¿Qué es una skill?", icon:"repeat", p:[
+      "Una skill es un conjunto de instrucciones guardadas que le indican a Claude exactamente cómo resolver un tipo de tarea específico, siempre de la misma forma, sin tener que reexplicarla cada vez.",
+      "En la Sesión 3 vamos a ver una skill aplicada a Claude Design, pero el concepto es más general: cualquier tarea repetitiva y bien definida —redactar un reporte con cierto formato, seguir una checklist de revisión, aplicar siempre el mismo criterio de evaluación— se puede convertir en una skill, para que el equipo completo la use de forma consistente."
+    ], clave:"Una skill convierte una tarea repetitiva en un procedimiento que Claude sigue siempre igual, sin que nadie tenga que reexplicarlo cada vez."},
+    {h:"¿Qué son las rutinas en Claude?", icon:"clock", p:[
+      "Una rutina es, en esencia, un agente al que le pones un horario: en vez de que una persona abra la conversación y pida algo, la rutina se dispara sola en el momento definido —una sola vez, o de forma recurrente— y ejecuta la instrucción que se dejó preparada, sin que nadie tenga que estar presente.",
+      "Esto trae una exigencia particular: como nadie va a estar ahí para aclarar dudas en el momento, la instrucción debe quedar completa y sin ambigüedad desde que se configura la rutina, no durante una conversación de ida y vuelta como el chat normal."
     ], ul:[
-      "Ejemplo débil: “hazme un resumen”.",
-      "Ejemplo bien estructurado: “Con base en este reporte de venta semanal, actúa como analista de Promotoría y dame los 3 SKU con mayor caída de venta por tienda, en una tabla.”"
-    ]}
+      "Un disparador o horario: cuándo se ejecuta (una fecha específica, o de forma recurrente cada día, semana, etc.).",
+      "La instrucción o tarea que debe realizar cada vez que se dispara, escrita de forma completa y autosuficiente.",
+      "Opcionalmente, a qué herramientas, archivos o cuentas tiene acceso mientras corre, y cómo debe avisar cuando termina (por ejemplo, una notificación o un correo)."
+    ], clave:"Una rutina es un agente con horario propio: se configura una vez y se ejecuta sola, con una instrucción completa desde el inicio porque nadie va a estar ahí para aclarársela."},
+    {h:"Cómo armar un buen prompt", icon:"chat", p:[
+      "Un buen prompt casi siempre tiene cuatro partes: contexto (qué información relevante le das), rol (desde qué perspectiva quieres la respuesta), tarea (qué necesitas exactamente) y formato (cómo quieres el resultado). No hace falta memorizar una fórmula rígida — basta con preguntarte, antes de escribir: \"¿le estoy dando a esto la misma claridad que le daría a una persona nueva en mi equipo?\""
+    ], ejemplo:{titulo:"Las cuatro partes en un solo prompt", texto:"\"Eres analista de Promotoría en KRAM [rol]. Aquí está el reporte de venta de la semana de 5 tiendas de la zona sur [contexto/adjunto]. Identifica los 3 SKU con mayor caída de venta versus la semana anterior [tarea] y entrégamelo en una tabla de 3 columnas: SKU, % de caída, posible causa [formato].\""}},
+    {h:"Herramientas complementarias para resultados más robustos", icon:"toolbox", p:[
+      "Todo lo visto hasta ahora funciona directamente dentro de Claude, sin instalar nada. Pero cuando un resultado necesita ir un paso más allá —convertirse en una aplicación real, guardar datos de verdad, o publicarse para que otros lo usen— existen herramientas complementarias que se conectan bien con el trabajo ya hecho con la IA. Este mismo programa de capacitación es un ejemplo: se construyó con Claude, pero se publicó y se conecta a una base de datos real usando varias de estas herramientas."
+    ], ul:[
+      "Visual Studio Code (VS Code) — el editor de código más usado; permite abrir, revisar y ajustar con más control los archivos que la IA genera, antes de usarlos en producción.",
+      "GitHub — guarda versiones del trabajo, permite compartirlo con otros, y es la forma más común de publicar una página o herramienta para que cualquiera con el link la use (como se hizo con el sitio de este programa).",
+      "Vercel — un servicio para publicar páginas y aplicaciones web en internet en minutos, sin tener que configurar un servidor.",
+      "Supabase — una base de datos en la nube lista para usar; permite que una herramienta hecha con IA guarde información real (como las respuestas de los quizes de este programa) y la consulte después."
+    ], clave:"Estas herramientas son fáciles de empezar a usar, pero el resultado sigue dependiendo de tener contexto claro y una estructura bien pensada — la herramienta no reemplaza el criterio de quien la usa."}
   ],
-  video:{id:"C83UmS4O2zk", titulo:"IA: Agentes Autónomos vs. Automatizaciones — La diferencia clave", nota:"Video corto (formato Short) en español, exactamente sobre la distinción central de esta sesión."},
+  videos:[
+    {id:"4RDMDIgvGY8", embed:false, titulo:"Video complementario de la Sesión 2 (1 de 2)", nota:null},
+    {id:"7woDMFD_o5w", embed:false, titulo:"Video complementario de la Sesión 2 (2 de 2)", nota:null}
+  ],
   quiz:[
     {q:"La diferencia clave entre automatización y autonomía es:", opts:["No hay diferencia real","La automatización sigue reglas fijas predefinidas; la autonomía decide en tiempo real según el contexto","La autonomía siempre es más lenta","La automatización usa IA y la autonomía no"], correct:1},
     {q:"Un agente de IA se diferencia de un simple chat porque:", opts:["Es más caro","Puede tomar acciones y usar herramientas para completar una tarea, no solo responder texto","No necesita instrucciones","Solo funciona sin internet"], correct:1},
     {q:"¿Qué significa que un humano esté \"human-in-the-loop\"?", opts:["Que la IA trabaja sola sin supervisión","Que una persona revisa o aprueba las acciones antes de que sean definitivas","Que solo los humanos pueden usar la IA","Que el humano programa el modelo"], correct:1},
     {q:"La \"ventana de contexto\" de un modelo se refiere a:", opts:["La pantalla donde se usa el chat","La cantidad de información que el modelo puede tener presente y usar en una conversación","El horario en que funciona la IA","El tamaño del archivo de imagen"], correct:1},
     {q:"Guardar el contexto de KRAM en un \"Proyecto\" de Claude sirve para:", opts:["Borrar el historial","Que la IA no tenga que volver a preguntar el mismo contexto cada vez","Cambiar de idioma","Reducir el número de usuarios"], correct:1},
-    {q:"¿Cuál de estos es un ejemplo de prompt bien estructurado para el trabajo diario en KRAM?", opts:["“Ayuda”","“Con base en este reporte de venta semanal, resume los 3 SKU con mayor caída de venta por tienda y sugiere una acción”","“Hazme un resumen”","“Información”"], correct:1}
+    {q:"¿Cuál de estos es un ejemplo de prompt bien estructurado para el trabajo diario en KRAM?", opts:["“Ayuda”","“Con base en este reporte de venta semanal, resume los 3 SKU con mayor caída de venta por tienda y sugiere una acción”","“Hazme un resumen”","“Información”"], correct:1},
+    {q:"¿Qué es Cowork?", opts:["Un modelo de Claude","El modo de Claude pensado para automatizar tareas de trabajo con archivos y proyectos completos, no solo conversar","Un tipo de conector","Una skill predefinida"], correct:1},
+    {q:"Una skill en Claude sirve para:", opts:["Cambiar el idioma del modelo","Convertir una tarea repetitiva en un procedimiento que Claude sigue siempre de la misma forma","Bloquear el acceso a internet","Aumentar el límite de tokens"], correct:1},
+    {q:"Una \"rutina\" en Claude es, en esencia:", opts:["Un reporte fijo que nunca cambia","Un agente al que le pones un horario, para que se ejecute solo sin que nadie esté presente","Un tipo de prompt corto","Una función exclusiva de Claude Design"], correct:1},
+    {q:"Herramientas como GitHub, Vercel o Supabase sirven para:", opts:["Reemplazar por completo el criterio de quien las usa","Llevar un resultado hecho con IA un paso más allá (publicarlo, guardar datos reales, versionarlo) — pero siguen dependiendo de contexto y estructura","Sustituir a Claude por completo","Nada relevante para este programa"], correct:1}
   ],
   entregable:null
 },
@@ -372,24 +602,31 @@ const SESSIONS = [
     {t:5,  titulo:"Cierre", desc:"Quiz y entregable de la sesión."}
   ],
   contenido:[
-    {h:"¿Qué es Claude Design?", p:[
-      "Es la herramienta dentro de Claude para crear piezas visuales completas y editables —no solo texto— a partir de una instrucción: fichas de producto, gráficos para exhibidores, calendarios de visita, señalética de punto de venta, infografías de proceso. El resultado no es una imagen fija: cada elemento se puede ajustar después."
+    {h:"¿Qué es Claude Design?", icon:"palette", p:[
+      "Es la herramienta dentro de Claude para crear piezas visuales completas y editables —no solo texto— a partir de una instrucción: fichas de producto, gráficos para exhibidores, calendarios de visita, señalética de punto de venta, infografías de proceso. El resultado no es una imagen fija: cada elemento se puede ajustar después.",
+      "La diferencia con pedirle una imagen a un generador normal es clave: ahí obtienes una imagen \"cerrada\" que, si algo está mal —un color, un texto, una proporción— casi siempre hay que regenerar desde cero, con el riesgo de que salga distinto. En Claude Design, cada texto, cada color y cada bloque de la pieza queda como un elemento independiente que se puede seleccionar y ajustar después, igual que en un editor de diseño tradicional, pero habiendo partido de una instrucción en lenguaje natural en vez de un lienzo en blanco."
+    ], clave:"A diferencia de una imagen \"cerrada\", cada elemento de una pieza en Claude Design se puede seleccionar y ajustar después."},
+    {h:"Casos de uso para Comercializadora KRAM", icon:"grid", p:[
+      "Estos son ejemplos concretos de piezas que se pueden resolver en minutos, sin depender de un diseñador para cada ajuste menor:"
+    ], ul:[
+      "Ficha técnica de un producto nuevo para capacitar al equipo de tienda (ingredientes, presentación, precio sugerido, argumento de venta).",
+      "Gráfico de acomodo sugerido de anaquel, para explicarle a un promotor cómo debería verse la exhibición.",
+      "Señalética o material POP para una exhibición temporal o de temporada.",
+      "Calendario visual de visitas por supervisor, para que cada equipo sepa qué tienda le toca y cuándo.",
+      "Infografía de un proceso interno de CEDIS (por ejemplo, los pasos para recibir y verificar un pedido)."
     ]},
-    {h:"Casos de uso para Promotoría y CEDIS", p:[], ul:[
-      "Ficha técnica de un producto nuevo para capacitar al equipo de tienda.",
-      "Gráfico de acomodo sugerido de anaquel.",
-      "Señalética o material POP para una exhibición temporal.",
-      "Calendario visual de visitas por supervisor.",
-      "Infografía de un proceso interno de CEDIS."
-    ]},
-    {h:"De la instrucción al diseño: buenas prácticas", p:[
-      "Entre más claro seas sobre el estilo (colores, tono, tamaño), la marca y el objetivo de la pieza, mejor el primer resultado. Por ejemplo: “usa navy #16233F y verde #1F7A5C, estilo limpio, pensado para imprimirse y pegarse en un anaquel de autoservicio.”"
-    ]},
-    {h:"Skills: instrucciones que se guardan y se reutilizan", p:[
-      "Una skill es un conjunto de instrucciones guardadas para repetir una tarea siempre de la misma forma, sin tener que reexplicarla cada vez. Es el mismo principio que un formato o una plantilla, pero aplicado a instrucciones para la IA."
-    ]}
+    {h:"De la instrucción al diseño: buenas prácticas", icon:"sliders", p:[
+      "Entre más claro seas sobre el estilo (colores, tono, tamaño), la marca y el objetivo de la pieza, mejor el primer resultado. Por ejemplo: “usa navy #16233F y verde #1F7A5C, estilo limpio, pensado para imprimirse y pegarse en un anaquel de autoservicio.”",
+      "También ayuda decir para quién es la pieza y dónde se va a usar: no es lo mismo un gráfico pensado para proyectarse en una pantalla en una junta, que uno pensado para imprimirse tamaño carta y pegarse en un anaquel. Entre más contexto de uso le des, menos ajustes vas a necesitar después — y, como con cualquier instrucción, siempre puedes pedirle una segunda versión (\"hazla más simple\", \"usa menos texto\", \"agranda el precio\") en vez de empezar de cero."
+    ], clave:"Entre más claro seas sobre estilo, marca, público y uso de la pieza, menos ajustes vas a necesitar después."},
+    {h:"Skills: instrucciones que se guardan y se reutilizan", icon:"repeat", p:[
+      "Una skill es un conjunto de instrucciones guardadas para repetir una tarea siempre de la misma forma, sin tener que reexplicarla cada vez. Es el mismo principio que un formato o una plantilla, pero aplicado a instrucciones para la IA.",
+      "Por ejemplo: si cada semana alguien del equipo genera una ficha de producto con la misma estructura (nombre, categoría, presentación, precio sugerido, argumento de venta), esa estructura se puede guardar como una skill una sola vez. De ahí en adelante, basta con darle los datos del producto nuevo y la IA sigue automáticamente ese mismo formato — sin que cada persona del equipo tenga que reinventar la instrucción por su cuenta."
+    ], clave:"Una skill se configura una sola vez y de ahí en adelante todo el equipo sigue el mismo formato, sin reinventar la instrucción."}
   ],
-  video:{id:"xWcTZD7UHTI", titulo:"Cómo utilizar Claude Design desde cero — Tutorial en español", nota:"⚠ No pudimos verificar de forma automática la duración exacta de este tutorial (YouTube bloqueó la consulta). Revísalo antes de tu sesión en vivo; si dura más de 5 minutos, usa solo el fragmento inicial o sustitúyelo."},
+  videos:[
+    {id:"OgHQTezKE4Q", embed:false, titulo:"Video de la Sesión 3", nota:null}
+  ],
   quiz:[
     {q:"Claude Design es una herramienta pensada principalmente para:", opts:["Programar bases de datos","Crear piezas visuales editables (gráficos, documentos, mockups) a partir de una instrucción","Enviar correos automáticos","Grabar video"], correct:1},
     {q:"¿Cuál de estos es un buen caso de uso de Claude Design para Promotoría?", opts:["Calcular nómina","Crear una ficha de producto o gráfico para exhibidor de tienda","Programar un servidor","Traducir un contrato legal"], correct:1},
@@ -398,92 +635,335 @@ const SESSIONS = [
     {q:"Los elementos de un diseño creado en Claude Design se pueden:", opts:["Solo ver, no modificar","Editar y ajustar después de generados (colores, textos, posición)","Solo exportar en audio","Eliminar automáticamente en 24 horas"], correct:1},
     {q:"¿Qué debes adjuntar como entregable de esta sesión?", opts:["Un video de la sesión en vivo","El diseño que creaste en Claude Design (imagen o PDF exportado)","Tu identificación oficial","Nada, es opcional"], correct:1}
   ],
-  entregable:{tipo:"file", etiqueta:"Adjunta el diseño que creaste en Claude Design", ayuda:"Exporta tu pieza como imagen (JPG/PNG) o PDF y súbela aquí. Tamaño máximo recomendado: 10 MB."}
+  entregable:{tipo:"file", etiqueta:"Adjunta el diseño que creaste en Claude Design", ayuda:"Exporta tu pieza como imagen (JPG/PNG) o PDF y súbela aquí. Tamaño máximo recomendado: 10 MB."},
+  ejercicios:[
+    {
+      num:1,
+      titulo:"Benchmark de mercado en presentación",
+      objetivo:"Genera un análisis ejecutivo de la categoría de confitería y chocolates en México, listo para compartirse o convertirse en presentación, usando únicamente un prompt en Claude.",
+      pasos:[
+        "Abre una conversación nueva en Claude (claude.ai) — no necesitas adjuntar ningún archivo.",
+        "Si quieres el resultado directo en formato presentación, activa Claude Design antes de pegar el prompt (ícono de paleta en la barra inferior).",
+        "Copia el prompt completo de abajo y pégalo en Claude.",
+        "Revisa el análisis generado: identifica los datos y tendencias más relevantes para la zona o cuentas que atiendes.",
+        "Pídele a Claude que convierta el análisis en una presentación de 5 a 6 diapositivas ejecutivas.",
+        "Exporta el resultado como PDF o imagen y compártelo con tu equipo."
+      ],
+      prompt:{titulo:"Prompt — Benchmark de mercado confitería",texto:"Actúa como analista de inteligencia comercial especializado en la industria de confitería, chocolates y snacks premium en México.\n\nTu tarea es generar un benchmark ejecutivo de mercado para la categoría, enfocado en punto de venta y promotoría, que sirva de base para una presentación interna.\n\nIncluye:\n\n1. PANORAMA DE LA CATEGORÍA\nTamaño estimado del mercado de chocolates y confitería en México (valor y volumen anual), principales segmentos (tableta, golosinas, premium, snacks) y estacionalidad más relevante (temporadas pico de venta).\n\n2. PRINCIPALES JUGADORES EN PUNTO DE VENTA\nLas 5 marcas con mayor presencia en anaquel en autoservicios y tiendas de conveniencia, sus estrategias de exhibición más comunes y los rangos de precio por segmento.\n\n3. TENDENCIAS ACTUALES DE CONSUMO\nQué está creciendo (ingredientes, formatos, ocasiones de consumo), qué está siendo desplazado, y cuáles son las oportunidades de nicho menos saturadas.\n\n4. INDICADORES CLAVE PARA PROMOTORÍA\nMétricas que las marcas líderes monitorean en punto de venta, buenas prácticas de gestión de anaquel y señales tempranas de pérdida de participación en una cuenta.\n\n5. RECOMENDACIONES ACCIONABLES (90 días)\n3 acciones concretas que una distribuidora-comercializadora puede implementar para mejorar su posición en el canal.\n\nFormato ejecutivo: secciones claras, datos cuantificables donde sea posible, hallazgos más relevantes en negritas. Al terminar, ofrece convertir el análisis en una presentación de 5 a 6 diapositivas lista para proyectarse."}
+    },
+    {
+      num:2,
+      titulo:"Video publicitario de producto (Ritter Pistache)",
+      objetivo:"Produce una pieza audiovisual publicitaria de 15 a 30 segundos para redes sociales y pantallas digitales de punto de venta, a partir de imágenes reales del producto.",
+      pasos:[
+        "PASO OBLIGATORIO: antes de pegar el prompt, adjunta 3 imágenes de Ritter Pistache a la conversación. Imagen 1: packaging frontal con buena resolución. Imagen 2: tableta o interior del chocolate, donde se vea la textura y el pistache. Imagen 3: ángulo complementario, producto abierto o imagen oficial adicional.",
+        "Usa imágenes oficiales de la marca o fotografías reales del producto. Evita screenshots de baja resolución o imágenes donde el empaque esté parcialmente oculto.",
+        "Abre una conversación nueva en Claude con el modelo de mayor capacidad disponible y activa todas las herramientas disponibles (Design, artefactos, código).",
+        "Carga las 3 imágenes en la conversación y luego copia y pega el prompt completo de abajo.",
+        "Claude analizará las imágenes, confirmará que las recibió y procederá automáticamente con la producción — no necesitas dar autorización adicional después del análisis.",
+        "Revisa el resultado: ajusta colores, texto o composición usando instrucciones en lenguaje natural ('hazlo más oscuro', 'agranda el producto', 'cambia el fondo').",
+        "Exporta la pieza final o descarga los archivos generados."
+      ],
+      prompt:{titulo:"Prompt — Video publicitario Ritter Pistache",texto:"EJERCICIO — CREACIÓN DE VIDEO PUBLICITARIO RITTER PISTACHE\n\nPASO 2 — VERIFICACIÓN OBLIGATORIA DE LAS IMÁGENES\nAntes de diseñar o generar cualquier contenido, analiza las 3 imágenes adjuntas.\nVerifica visualmente: logotipo, nombre exacto del producto, diseño del packaging, colores, tipografías, geometría, proporciones, apariencia del chocolate, textura, pistaches e información visible relevante.\nLas tres imágenes constituyen la REFERENCIA VISUAL PRINCIPAL Y OBLIGATORIA del ejercicio.\n\nREGLA CRÍTICA\nNO INVENTES NI REDISEÑES EL PRODUCTO.\nNo debes modificar arbitrariamente: logo, nombre Ritter, nombre Pistache, packaging, colores originales, tipografías de marca, proporciones, forma del chocolate, textos impresos ni elementos gráficos característicos.\nCuando generes nuevas escenas, debes utilizar las imágenes suministradas como ancla visual del producto real.\nPuedes crear alrededor del producto: fondos, pistaches, chocolate, partículas, iluminación, reflejos, sombras, movimiento, escenarios, composiciones, elementos gráficos. Pero el producto debe permanecer visualmente fiel a las referencias suministradas.\n\nPASO 3 — MODELO Y HERRAMIENTAS\nPara realizar este ejercicio, utiliza el modelo de Claude de mayor capacidad disponible en la cuenta que permita creación de artefactos, ejecución de código y trabajo visual.\nActiva todas las herramientas disponibles relacionadas con: diseño, creación visual, imágenes, animación, código, artifacts, archivos, composición audiovisual. Si existe una función específica de Claude Design, utilízala.\n\nPASO 4 — INICIO DEL TRABAJO\nNo comiences generando el video inmediatamente.\nPrimero:\n1. Confirma que recibiste y puedes visualizar las 3 imágenes.\n2. Analiza las tres referencias.\n3. Determina cuál imagen funcionará mejor como referencia principal del packaging.\n4. Determina cuál utilizarás para representar el chocolate/producto.\n5. Identifica los elementos visuales que deben preservarse obligatoriamente.\n6. Después de completar esta verificación, procede automáticamente con la producción.\nNo solicites autorización adicional después de analizar las imágenes.\n\nROL\nActúa simultáneamente como: Director Creativo Senior de una agencia internacional de publicidad, Director de Arte especializado en productos FMCG, Motion Designer, Especialista en publicidad digital y redes sociales, Especialista en diseño de materiales para Point of Sale (POS), Product Visual Designer, y Especialista en storytelling audiovisual de productos premium.\n\nOBJETIVO PRINCIPAL\nQuiero que diseñes y produzcas — no solamente conceptualices — una pieza audiovisual publicitaria de entre 15 y 30 segundos para Ritter Pistache.\nLa pieza debe tener calidad visual suficiente para utilizarse como una demostración realista de contenido publicitario para redes sociales y pantallas digitales en punto de venta (POS).\n\nA partir de este punto, continúa con TODAS las especificaciones de producción, storyboard, dirección de arte, motion design, audio, formatos, entregables y controles de calidad establecidos en este ejercicio.\n\nREGLA PRIORITARIA DURANTE TODO EL PROCESO:\nLas 3 imágenes cargadas al inicio tienen prioridad como referencia visual del producto. Si existe cualquier contradicción entre una interpretación generada y las fotografías suministradas, prevalecen las fotografías del producto real."}
+    },
+    {
+      num:3,
+      titulo:"Ritter Sport Pistache — AI Marketing Command Center",
+      objetivo:"Construye un dashboard ejecutivo de Marketing Intelligence con cuatro pestañas navegables (Trend Intelligence, Campaign Studio, Live Experience, Performance Lab) que demuestre en vivo cómo la IA transforma una señal cultural en campaña, creatividad y aprendizaje.",
+      pasos:[
+        "Cada persona carga primero las 3 fotografías de Ritter Sport Pistache.",
+        "Selecciona el modelo de Claude con mayor capacidad disponible para Artifacts/código/diseño y creación de archivos.",
+        "Pega el prompt completo de arriba.",
+        "Deja que Claude genere la primera versión. No comiencen a corregir pequeñas cosas mientras está construyendo.",
+        "Cuando termine, abre el HTML y revisa específicamente las cuatro pestañas en este orden: Intelligence → Campaign → Live Experience → Performance.",
+        "La segunda instrucción a Claude debería ser de QA, no de rediseño: \"abre/revisa el entregable completo, identifica errores visuales, funcionales, imágenes cortadas, datos inconsistentes, mockups poco realistas o componentes que no funcionen y corrígelos sin cambiar la arquitectura de cuatro pestañas\".",
+        "Solo después haría ajustes estéticos."
+      ],
+      prompt:{titulo:"Prompt — AI Marketing Command Center Ritter Pistache",texto:"RITTER SPORT PISTACHE — AI MARKETING COMMAND CENTER\n\nOBJETIVO DEL EJERCICIO\nConstruye una demostración ejecutiva, visual y funcional de cómo Inteligencia Artificial puede transformar el proceso completo de marketing de una marca de consumo masivo:\nTREND INTELLIGENCE → STRATEGY → CREATIVE → CONTENT → CONSUMER EXPERIENCE → MEASUREMENT → OPTIMIZATION\n\nLa marca utilizada para la demostración será: RITTER SPORT PISTACHE\nEl mercado objetivo será: CIUDAD DE MÉXICO\n\nEste proyecto será presentado en vivo ante un foro. Por lo tanto, prioriza: CALIDAD > CANTIDAD\nNo quiero decenas de ideas superficiales. Quiero pocos entregables, pero: terminados, visualmente impactantes, específicos, navegables, tangibles, coherentes entre sí, suficientemente profesionales para mostrarse en una presentación ejecutiva.\n\nPASO 1 — ANTES DE PEGAR ESTE PROMPT\nEl usuario debe cargar primero 3 fotografías reales y de alta calidad de Ritter Sport Pistache.\nFOTO 1: Packaging frontal completo.\nFOTO 2: Chocolate/tableta/producto fuera del packaging.\nFOTO 3: Packaging + producto o fotografía complementaria desde otro ángulo.\nEstas tres imágenes serán la referencia visual obligatoria.\n\nPASO 2 — REGLA CRÍTICA DE IDENTIDAD\nAntes de comenzar: (1) Analiza las 3 fotografías. (2) Identifica correctamente el producto. (3) Identifica packaging. (4) Identifica colores. (5) Identifica logotipo. (6) Identifica tipografía. (7) Identifica geometría. (8) Identifica apariencia del chocolate. (9) Identifica pistache y demás elementos visibles.\nNO INVENTES NI REDISEÑES: logo, nombre, packaging, textos, proporciones, colores, forma del producto.\nLas imágenes suministradas tienen prioridad sobre cualquier interpretación generada mediante IA.\n\nPASO 3 — CAPACIDAD A UTILIZAR\nUtiliza el modelo de Claude de mayor capacidad disponible que tenga acceso a diseño, creación visual, artifacts, ejecución de código y creación de archivos. Utiliza todas las herramientas disponibles que ayuden a: investigar, analizar, diseñar, generar imágenes, generar assets, programar, construir HTML, crear visualizaciones, crear mockups, producir prototipos. No te limites a responder mediante texto.\n\nPASO 4 — ROL\nActúa como un equipo integrado compuesto por: Chief Marketing Officer FMCG, Consumer Insights Director, Social Intelligence Lead, Trend Forecaster, Brand Strategist, Director Creativo, Director de Arte, Social Media Strategist, Senior Graphic Designer, Motion Designer, UX/UI Designer, Data Analyst, Marketing Data Scientist, Front-End Developer, Especialista en Instagram, Especialista en TikTok, Especialista en Gen Z y Millennials, Especialista en comportamiento del consumidor en Ciudad de México.\nTu estándar de trabajo debe corresponder al de una combinación entre: consultoría estratégica + agencia creativa + social intelligence + marketing analytics.\n\nENTREGABLE PRINCIPAL — UN ÚNICO DASHBOARD HTML LOCAL\nNombre: ritter_pistache_ai_marketing_command_center.html\nDebe funcionar al abrirlo directamente mediante doble clic en Chrome, Edge o Safari. No debe requerir: servidor, instalación, terminal, Python, Node, login, backend.\nDebe contener internamente: HTML + CSS + JavaScript + datos + gráficas + interacciones.\n\nEL DASHBOARD TENDRÁ EXACTAMENTE 4 PESTAÑAS:\n01 — TREND INTELLIGENCE | 02 — CAMPAIGN STUDIO | 03 — LIVE EXPERIENCE | 04 — PERFORMANCE LAB\nLas cuatro pestañas deben contar una misma historia. La navegación entre ellas debe demostrar el flujo completo de trabajo de Marketing.\n\nPESTAÑA 01 — TREND INTELLIGENCE\nPREGUNTA: ¿QUÉ ESTÁ PASANDO Y QUÉ DEBERÍA HACER RITTER SPORT?\nAnaliza señales: pistachio chocolate, Dubai chocolate, pistachio desserts, pistachio cream, pistachio latte, pistachio croissant, pistachio gelato, green food aesthetics, premium indulgence, ASMR chocolate, chocolate breaking, food close-ups, pistachio visual culture.\nGEOGRAFÍA: GLOBAL → EEUU/Europa/Medio Oriente/Asia → LATAM → MÉXICO → CDMX\nNo inventes datos. Identifica: REAL DATA / ESTIMATE / PROXY / DEMO DATA.\nTREND JOURNEY: GLOBAL SIGNAL → INTERNATIONAL ACCELERATION → MEXICO SIGNAL → CDMX OPPORTUNITY → EXPECTED PEAK\nTREND SCORE — PISTACHIO OPPORTUNITY SCORE (0–100): Trend Velocity 20%, CDMX Cultural Fit 20%, Ritter Sport Fit 25%, Visual Potential 15%, Engagement Potential 10%, Commercial Potential 10%.\nINSIGHT PRINCIPAL — WHAT? (qué ocurre) / SO WHAT? (por qué importa a Ritter Sport) / NOW WHAT? (qué debe hacer Marketing)\n\nPESTAÑA 02 — CAMPAIGN STUDIO\nPREGUNTA: ¿CÓMO CONVERTIMOS LA TENDENCIA EN UNA CAMPAÑA?\nMini campaña de 14 DÍAS. CONCEPTO: PISTACHIO, PERFECTLY SQUARED.\nAUDIENCIA: Gen Z, Millennials, Foodies urbanos, CDMX.\n\n8 PIEZAS CREATIVAS:\nPIEZA 01 — HERO REEL: Instagram Reel 15s. Awareness + Craving. Storyboard, hook, escenas, copy, CTA, motion, audio.\nPIEZA 02 — ASMR REEL: 8–12s. Chocolate Break + Pistachio. Craving + Retention.\nPIEZA 03 — HERO STATIC: Instagram Feed 1080×1350. Producto protagonista.\nPIEZA 04 — LIFESTYLE STATIC: Instagram Feed 1080×1350. Ritter Sport en ocasión de consumo CDMX.\nPIEZA 05 — CAROUSEL: 4 slides (Hook / Pistachio / Chocolate / Product+CTA).\nPIEZA 06 — STORY: 1080×1920. Encuesta \"Pistachio lover?\"\nPIEZA 07 — STORY: 1080×1920. Product + Craving + CTA.\nPIEZA 08 — TIKTOK: Concepto nativo 10–15s. Hook + lenguaje nativo + trend + producto + CTA.\n\nCONTENT CALENDAR: 14 días horizontal. Fecha, plataforma, formato, objetivo, audiencia, trend, CTA, KPI por pieza.\nPRODUCTION BOARD: Kanban IDEA → DESIGN → PRODUCTION → APPROVAL → READY.\n\nPESTAÑA 03 — LIVE EXPERIENCE\nPREGUNTA: ¿CÓMO LO VERÍA REALMENTE EL CONSUMIDOR?\nIPHONE MOCKUP 01: Hero Reel en iPhone simulando Instagram Reels. Interfaz, producto, caption, likes, comments, share, save, CTA. Identificar como simulación conceptual.\nIPHONE MOCKUP 02: Hero Static dentro del feed de Instagram.\nIPHONE MOCKUP 03: Instagram Story pantalla completa. Progress indicator, encuesta, producto.\nIPHONE MOCKUP 04: Carousel con navegación entre las 4 slides.\nTIKTOK MOCKUP: Concepto TikTok en pantalla móvil.\nGRID VIEW: Instagram Profile Grid mínimo 9 posiciones.\nCAMPAIGN GALLERY: Galería limpia, clic amplía la pieza.\nBEFORE / AFTER: RAW PRODUCT → AI CREATIVE (foto original vs pieza final generada).\n\nPESTAÑA 04 — PERFORMANCE LAB\nPREGUNTA: ¿CÓMO SABEMOS QUÉ FUNCIONÓ Y QUÉ HACEMOS DESPUÉS?\nIMPORTANTE: Usar DEMO PERFORMANCE DATA claramente identificado si no hay métricas reales.\nKPI CARDS: REACH, VIDEO VIEWS, ENGAGEMENT RATE, SAVE RATE, SHARE RATE, VIDEO COMPLETION, PROFILE VISITS, FOLLOWER GROWTH.\nCONTENT PERFORMANCE: Ranking de las 8 piezas. Content Performance Score 0–100.\nPERFORMANCE SCORE: Engagement 25% + Shares 20% + Saves 15% + Retention 20% + Profile Actions 10% + Sentiment 10%.\n4 GRÁFICAS: Performance por pieza / Reach vs Engagement / Video Retention / Creative Territory Performance.\nAI INSIGHTS — WHAT AI LEARNED: WINNER (mejor pieza + por qué) / LOSER (peor + posible causa) / PATTERN (patrón identificado) / NEXT MOVE (qué debe producir Marketing).\nOPTIMIZATION ENGINE: KEEP / IMPROVE / STOP / TEST NEXT.\nNEXT CREATIVE — NOVENA PIEZA: VERSION 1 → DATA + AI LEARNING → VERSION 2 (optimizada). Demostrar que la IA aprende del desempeño y modifica la siguiente creatividad.\n\nDISEÑO: Producto digital premium. No PowerPoint, no Excel, no reporte académico. Plataforma moderna: Marketing Intelligence + Creative AI + Analytics.\nMICROINTERACCIONES: hover, tooltips, animated counters, transiciones suaves, tabs, cards, modals, carousels, progress indicators — con moderación.\n\nREGLA DE PRESENTACIÓN EN FORO (narrativa en menos de 5 minutos):\n\"La IA detectó una oportunidad cultural alrededor del pistache.\" → 01 INTELLIGENCE\n\"Esa señal se convirtió en una campaña específica para Ritter Sport Pistache en CDMX.\" → 02 CAMPAIGN\n\"Diseñó cómo realmente lo vería el consumidor.\" → 03 LIVE EXPERIENCE\n\"Las métricas regresan al sistema. La IA aprende qué funcionó y recomienda la siguiente creatividad.\" → 04 PERFORMANCE\n\nENTREGABLES FINALES:\n1. ritter_pistache_ai_marketing_command_center.html — Dashboard funcional 4 pestañas.\n2. ritter_pistache_assets — Carpeta con assets: /hero /reels /posts /carousel /stories /tiktok /mockups /dashboard.\n3. ritter_pistache_executive_demo.pptx — Presentación ejecutiva 5 slides.\n\nCONTROL DE CALIDAD antes de entregar: Prueba las 4 pestañas, botones, carruseles, filtros, modals, imágenes, gráficas, teléfonos, responsive. Verifica identidad de Ritter Sport Pistache. Verifica que datos Demo estén identificados. Verifica coherencia de campaña en todas las piezas.\n\nMUY IMPORTANTE: NO termines con una explicación. No quiero wireframe, outline, pseudocódigo, lista de ideas. CONSTRUYE LOS ARCHIVOS Y ASSETS. Resuelve limitaciones técnicas con alternativas en lugar de detener el proyecto."}
+    },
+
+    {
+      num:4,
+      titulo:"Anticipación de tendencias en redes sociales",
+      objetivo:"Genera un análisis de tendencias emergentes en redes sociales para la categoría de confitería y propón un plan de contenido accionable para el equipo de Marketing o Promotoría.",
+      pasos:[
+        "Abre una conversación nueva en Claude — no necesitas adjuntar archivos para este ejercicio.",
+        "Antes de copiar el prompt, define dos datos: (1) el producto o categoría que quieres analizar (ejemplo: chocolates premium, snacks, Ritter Sport), y (2) la red social de interés (Instagram o TikTok).",
+        "Copia el prompt de abajo y sustituye los corchetes [PRODUCTO] y [RED SOCIAL] con tus datos antes de pegarlo.",
+        "Revisa las tendencias identificadas y señala en la conversación las que más aplican a tu zona o a las cuentas que atiendes.",
+        "Pídele a Claude que genere el calendario de contenido en formato tabla para que sea más fácil de revisar y compartir.",
+        "Exporta el resultado como documento o pídele que lo convierta en una presentación de 4 a 5 diapositivas para compartir con el equipo."
+      ],
+      prompt:{titulo:"Prompt — Tendencias en redes sociales",texto:"OBJETIVO GENERAL\nActúa como un equipo multidisciplinario senior especializado en:\n\n* Trend Forecasting\n* Social Listening\n* Consumer Insights\n* Cultura digital\n* Estrategia de contenido\n* Marketing de consumo masivo\n* FMCG y confitería\n* Branding\n* Diseño gráfico\n* Dirección creativa\n* Social Media Intelligence\n* Data Analytics\n* Behavioral Insights\n* Coolhunting\n* Cultural Foresight\n* Performance Marketing\n* Visualización de datos\n* Diseño de dashboards ejecutivos\n* Desarrollo Front-End en HTML, CSS y JavaScript\n\nTu misión es diseñar y construir un dashboard ejecutivo e interactivo en HTML local para Ritter Sport, enfocado exclusivamente en Ciudad de México, que permita anticipar tendencias culturales y digitales relevantes para la marca y traducirlas en oportunidades concretas de marketing, comunicación, contenido, diseño y activación comercial.\n\nEl dashboard debe funcionar como una herramienta real de trabajo para un equipo de: Marketing, Brand Management, Diseño, Trade Marketing, Social Media, Innovación, Consumer Insights y Dirección Comercial.\n\nEl entregable debe ser profesional, ejecutivo, visual, analítico y accionable. No quiero un reporte teórico. Quiero un dashboard funcional que permita tomar decisiones.\n\nMARCA DE ANÁLISIS\nLa marca central será: Ritter Sport\nEl análisis debe considerar sus diferentes categorías, variedades, sabores, combinaciones, formatos y territorios posibles de consumo. No limitar el análisis a una sola variedad. Considerar especialmente oportunidades relacionadas con: chocolate con leche, chocolate oscuro, chocolate blanco, avellanas, almendras, pistache, frutas, berries, coco, caramelo, galleta, yogurt, sabores estacionales, combinaciones premium, sabores indulgentes, sabores relacionados con tendencias emergentes, formatos individuales, formatos para compartir, gifting, consumo impulsivo, consumo premium, ocasiones especiales y productos de temporada.\n\nEl objetivo no es modificar arbitrariamente el portafolio real de Ritter Sport. Cuando se propongan oportunidades nuevas, deben identificarse claramente como: Inspiración, Oportunidad conceptual, Tendencia adaptable o Posible innovación — nunca como producto existente si no lo es.\n\nALCANCE GEOGRÁFICO PRINCIPAL\nEl mercado objetivo es Ciudad de México. Toda recomendación final debe tener sentido específicamente para consumidores de CDMX. Sin embargo, para anticipar tendencias no debes limitarte exclusivamente a señales de CDMX. Utiliza una lógica de observación de tendencias por niveles.\n\nMODELO GEOGRÁFICO PARA DETECCIÓN DE TENDENCIAS\n\nNIVEL 1 — CIUDAD DE MÉXICO (Máxima prioridad)\nBuscar señales en: TikTok, Instagram, YouTube, Google Trends, búsquedas digitales, restaurantes, cafeterías, panaderías, conceptos gastronómicos, tiendas especializadas, supermercados, tiendas de conveniencia, eventos, festivales, universidades, cultura urbana, gastronomía, diseño, moda, entretenimiento, memes, lenguaje digital, hábitos generacionales, productos virales y sabores emergentes.\n\nNIVEL 2 — MÉXICO\nDetectar tendencias que aún no tienen escala en CDMX: sabores, ingredientes, productos virales, tendencias de consumo, temporalidades, celebraciones, influencers, gastronomía, retail, promociones, formatos, memes y tendencias culturales. Identificar cuáles señales nacionales pueden trasladarse a CDMX.\n\nNIVEL 3 — LATINOAMÉRICA\nPriorizar: Colombia, Argentina, Brasil, Chile, Perú. Buscar: sabores, combinaciones de ingredientes, formatos, contenido viral, campañas, estética, packaging, experiencias de marca y tendencias gastronómicas. Evaluar siempre compatibilidad cultural con CDMX.\n\nNIVEL 4 — MERCADOS GLOBALES CON CAPACIDAD DE ANTICIPACIÓN\nEstados Unidos (TikTok, cultura pop, formatos de contenido, creator economy, snacks, retail, sabores, branding, activaciones), Corea del Sur (estética, diseño, packaging, bebidas, postres, experiencias visuales, cultura juvenil), Japón (sabores, innovación de producto, ediciones limitadas, packaging, gifting, formatos estacionales), Europa — especialmente Alemania, Reino Unido, Francia, Italia, España (chocolate, premiumización, sostenibilidad, diseño, innovación gastronómica, retail, estacionalidad), China — únicamente cuando exista evidencia de transferencia internacional real (social commerce, live commerce, formatos de contenido, diseño, packaging, retail tecnológico, gamificación).\n\nPRINCIPIO FUNDAMENTAL\nUna tendencia global no es automáticamente una oportunidad para Ritter Sport México. Cada tendencia debe pasar por un análisis de: Relevancia cultural, Afinidad con CDMX, Afinidad con chocolate, Afinidad con Ritter Sport, Velocidad de crecimiento, Probabilidad de adopción, Madurez, Ventana temporal y Facilidad de activación.\n\nOBJETIVO CENTRAL DEL DASHBOARD\n\n1. ANTICIPACIÓN Y PREDICCIÓN DE TRENDS DE REDES SOCIALES\n¿Qué tendencias están emergiendo? ¿Cuáles están creciendo? ¿Cuáles pueden llegar a CDMX? ¿Cuáles ya están ocurriendo en CDMX? ¿Cuánto tiempo podría existir antes de que alcancen su punto máximo? ¿Qué tendencias tienen relevancia específica para chocolate, sabores, ocasiones de consumo o comunicación?\n\n2. APLICACIONES PRÁCTICAS PARA MARKETING Y DISEÑO\nConvertir tendencias en ideas concretas para: contenido, social media, campañas, diseño, packaging conceptual, promociones, retail, activaciones, sampling, POS, influencers, creators, colaboraciones, ediciones limitadas, experiencias, storytelling, fotografía, video y motion graphics.\n\n3. FLUJO DE TRABAJO RECOMENDADO\n¿Qué debe hacer el equipo? ¿Cuándo? ¿Quién? ¿Qué cantidad de piezas? ¿Qué formato? ¿Qué prioridad? ¿Qué tendencia merece atención inmediata? ¿Qué tendencia debe seguir observándose? ¿Qué tendencia debe descartarse?\n\nARQUITECTURA DEL DASHBOARD\n\nSECCIÓN 1 — EXECUTIVE OVERVIEW\nKPI Cards: Tendencias monitoreadas, Tendencias emergentes, Tendencias prioritarias, Tendencias listas para activar, Tendencias en observación, Tendencias perdiendo relevancia. Incluir: Opportunity Score promedio, Trend Velocity promedio, Ventana promedio estimada de oportunidad.\n\nSECCIÓN 2 — TREND RADAR\nClasificar tendencias en: Emerging, Accelerating, Mainstream, Peak, Declining. Cada tendencia incluye: nombre, categoría, origen geográfico, plataforma, fecha de primera señal, crecimiento, relevancia para CDMX, relevancia para Ritter Sport, madurez, ventana estimada y Opportunity Score.\n\nSECCIÓN 3 — TREND FORECAST\nTabla ejecutiva de predicción. Columnas: Trend, Origen, Primer mercado detectado, Plataforma, Fecha primera señal, Fecha aceleración, Fecha estimada de llegada a CDMX, Fecha estimada de peak, Ventana recomendada de activación, Trend Velocity, CDMX Fit, Ritter Sport Fit, Opportunity Score, Acción recomendada.\n\nSISTEMA DE SCORING — TREND OPPORTUNITY SCORE (0 a 100)\nPonderación: Trend Velocity 20%, CDMX Cultural Fit 20%, Ritter Sport Brand Fit 20%, Engagement Potential 15%, Visual Potential 10%, Commercial Potential 10%, Ease of Execution 5%. Interpretación: 85-100 = Activate Now, 70-84 = Prepare Activation, 55-69 = Monitor Closely, 40-54 = Experimental, 0-39 = Low Priority.\n\nSECCIÓN 4 — HEATMAP DE OPORTUNIDADES\nCruzar Tendencias vs. Categorías Ritter Sport: Pistache, Avellana, Almendra, Chocolate oscuro, Chocolate con leche, Chocolate blanco, Frutas, Galletas, Caramelo, Premium, Seasonal, Gifting.\n\nSECCIÓN 5 — SOCIAL PLATFORM SIGNALS\nAnalizar: TikTok, Instagram, YouTube, Google Trends, Pinterest, Reddit, X, medios digitales, blogs gastronómicos, plataformas de diseño, retail, marketplaces. Mostrar: Volumen, Crecimiento, Engagement, Velocidad, Plataforma donde nació, Plataforma donde está creciendo, Plataforma donde se masificará.\n\nSECCIÓN 6 — CALENDARIO DE TRENDS (12 meses)\nOportunidades por: mes, semana, temporalidad, evento, cultura, consumo, celebraciones. Momentos clave: San Valentín, Semana Santa, Día del Niño, Día de las Madres, Día del Padre, Vacaciones, Regreso a clases, Fiestas Patrias, Halloween, Día de Muertos, Buen Fin, Navidad, Año Nuevo. Incorporar también: eventos deportivos, estrenos, festivales, conciertos, eventos culturales y gastronómicos. Para cada oportunidad indicar: Fecha, Trend, Momento cultural, Categoría Ritter Sport, Producto relacionado, Tipo de campaña, Canal, Formato, Fecha de inicio creativo, Fecha de producción, Fecha recomendada de publicación, Duración de campaña, Cantidad de piezas, Prioridad, Opportunity Score.\n\nSECCIÓN 7 — CONTENT QUANTITY PLANNER\nPor semana: TikTok videos, Instagram Reels, Stories, Static Posts, Carousels, YouTube Shorts, POS Assets, Digital Ads, Influencer Assets, Motion Graphics, Sampling Activations. Estructura: Semana, Trend seleccionado, Plataforma, Cantidad recomendada, Formato, Objetivo, CTA, Prioridad.\n\nSECCIÓN 8 — MARKETING APPLICATIONS\nPara cada tendencia prioritaria: TREND, WHY IT MATTERS, CONSUMER INSIGHT, RITTER SPORT CONNECTION, MARKETING IDEA, CONTENT IDEA, DESIGN IDEA, RETAIL IDEA, INFLUENCER IDEA, ACTIVATION IDEA, TIMING, PRIORITY.\n\nSECCIÓN 9 — DESIGN OPPORTUNITIES\nAnálisis visual de: paletas, tipografía, fotografía, motion design, packaging conceptual, composición, texturas, 3D, CGI, AI visual, estética de redes, memes, códigos culturales. Para cada tendencia indicar: DO y AVOID para proteger la identidad de Ritter Sport.\n\nSECCIÓN 10 — TREND TO CONTENT ENGINE\nLógica visual: SIGNAL → TREND → INSIGHT → RITTER SPORT OPPORTUNITY → CREATIVE IDEA → CONTENT → ACTIVATION → MEASUREMENT.\n\nSECCIÓN 11 — WORKFLOW RECOMENDADO\nFlujo semanal: LUNES = Trend Scouting, MARTES = Trend Scoring, MIÉRCOLES = Creative Translation, JUEVES = Production, VIERNES = Launch + Measurement. Pipeline de tendencias: Discovered, Monitoring, Validated, Creative Development, Production, Scheduled, Live, Measured, Archived.\n\nSECCIÓN 12 — RECOMMENDED ACTIONS\nTres columnas: ACTIVATE NOW, PREPARE, WATCH.\n\nSECCIÓN 13 — TOP 10 OPPORTUNITIES\nRanking final con: Ranking, Trend, Score, Categoría Ritter Sport, Timing, Plataforma, Aplicación, Acción inmediata.\n\nANÁLISIS TEMPORAL\nHorizonte estimado por tendencia: 0-30 días, 30-60 días, 60-90 días, 3-6 meses, 6-12 meses.\n\nTREND LEAD TIME\nIndicador adicional: Primera señal internacional → Señal en México → Aceleración en CDMX → Peak. Mostrar cuántas semanas disponibles existen para producir una campaña.\n\nFUENTES\nPriorizar: Google Trends, TikTok, TikTok Creative Center, Instagram, YouTube, Pinterest, Reddit, Meta, Exploding Topics, TrendWatching, WGSN, Mintel, Euromonitor, NielsenIQ, Statista, Retailers, Marketplaces, medios especializados, publicaciones gastronómicas. No inventar métricas. Cuando no exista un dato verificable, indicar: Estimated, Proxy o Directional Signal.\n\nINTERFAZ\nEstética: premium, moderna, minimalista, ejecutiva, digital, analítica, sofisticada. Incluir: Sidebar, Header, KPI Cards, Filtros, Tabs, Charts, Tables, Heatmaps, Calendar, Trend Cards, Opportunity Cards, Tooltips, Badges, Progress Bars, Status Indicators. Filtros por: Periodo, Trend Stage, Categoría Ritter Sport, Plataforma, Geografía, Opportunity Score, Horizonte temporal, Tipo de aplicación (Marketing, Design, Retail, Content, POS, Influencers). Interactividad: filtrar, ordenar, explorar, tooltips, cambiar periodos, seleccionar categorías y tendencias, expandir información.\n\nREQUISITO TÉCNICO FUNDAMENTAL\nEntregable: UN SOLO ARCHIVO HTML LOCAL. Debe funcionar abriendo directamente desde una computadora (doble clic). No necesita: servidor, backend, base de datos, instalación, Node, Python, terminal, API externa obligatoria ni login. Todo debe estar contenido dentro del archivo: HTML, CSS, JavaScript, Datos, Gráficas, Interacciones, Filtros.\n\nVISUALIZACIONES\nUsar: Line charts, Bar charts, Bubble charts, Scatter plots, Heatmaps, Timelines, Calendars, Radar charts, Progress bars, KPI Cards. Evitar gráficas decorativas sin valor analítico.\n\nRESPONSIVE DESIGN\nVisualizarse correctamente en: Laptop, Monitor, Tablet. Resolución objetivo: 1920x1080. Priorizar escritorio.\n\nDATOS DEMOSTRATIVOS\nSi un dato real no está disponible públicamente, usar datos demostrativos identificados claramente como: Demo Data. No mezclar datos simulados con datos reales sin diferenciarlos.\n\nINSIGHTS Y ALERTAS\nEl dashboard debe interpretar automáticamente resultados con mensajes ejecutivos: Emerging Opportunity, Rapid Acceleration, High CDMX Fit, Strong Ritter Sport Fit, Activation Window Opening, Potential Peak Approaching, Monitor Before Activation. Crear alertas visuales cuando: Opportunity Score > 85, Trend Velocity muy alta, ventana de activación menor a 30 días, tendencia cambie de Emerging a Accelerating, tendencia acercándose al Peak.\n\nCONTEXTO CDMX\nConsiderar características específicas: alta densidad urbana, movilidad, tiendas de conveniencia, supermercados, cafeterías, universidades, oficinas, restaurantes, centros comerciales, e-commerce, delivery, consumo impulsivo, cultura foodie, redes sociales, experiencias premium, eventos culturales. Analizar diferencias entre: Gen Z, Millennials, familias, profesionistas, foodies, consumidores premium.\n\nCONCLUSIÓN EJECUTIVA\nCerrar con: 3 tendencias para activar ahora, 3 para preparar, 3 para monitorear. Para cada una indicar: Why, When, What, Where, How.\n\nENTREGABLE FINAL\nGenera el dashboard completo y funcional. Produce el archivo: ritter_sport_trend_intelligence_cdmx.html. Debe poder abrirse localmente en un navegador y utilizarse inmediatamente. Una vez construido: revísalo, pruébalo, corrige errores y entrégalo terminado.\n\nEl objetivo final es crear una herramienta que permita a Ritter Sport pasar de ver una tendencia cuando ya es viral a identificarla, evaluarla y preparar una activación antes de que alcance su máxima relevancia en Ciudad de México."}
+    },  ]
 },
 {
   id:4, slug:"sesion-4",
-  titulo:"Plugins y conexiones nativas para KRAM",
-  navLabel:"Plugins y Conectores",
-  objetivo:"Al terminar, cada participante identifica al menos dos conectores aplicables a su función y propone un caso de uso concreto.",
-  ladderFocus:[5], ladderPreview:[6],
+  titulo:"Plugins, conectores y tareas programadas",
+  navLabel:"Plugins y Rutinas",
+  objetivo:"Al terminar, cada participante distingue un conector de un plugin, entiende de qué está hecho un plugin por dentro, y deja diseñada y corriendo su propia tarea programada.",
+  ladderFocus:[5], ladderPreview:[],
   agenda:[
-    {t:5,  titulo:"Repaso relámpago", desc:"Lo esencial de la Sesión 3."},
-    {t:10, titulo:"¿Qué es un plugin o conector?", desc:"Conectar la IA a herramientas reales."},
-    {t:15, titulo:"Conectores con mayor aplicación en KRAM", desc:"Drive, correo, calendario y más."},
-    {t:5,  titulo:"Video", desc:"Un flujo conectado en acción."},
-    {t:15, titulo:"Demo en vivo", desc:"Un caso real de Promotoría."},
-    {t:10, titulo:"Buenas prácticas y límites", desc:"Seguridad al conectar datos de la empresa."},
-    {t:5,  titulo:"Cierre", desc:"Quiz y entregable de la sesión."}
+    {t:4,  titulo:"Repaso relámpago", desc:"Lo esencial de la Sesión 3."},
+    {t:8,  titulo:"¿Qué es un conector?", desc:"Conectar la IA a herramientas reales."},
+    {t:10, titulo:"¿Qué es un plugin?", desc:"Un paquete listo: descripción, skills y conectores."},
+    {t:6,  titulo:"Plugin vs. conector", desc:"Diferencia conceptual y de uso."},
+    {t:10, titulo:"Anatomía del plugin de Productividad", desc:"Cómo está armado por dentro, pieza por pieza."},
+    {t:10, titulo:"Tareas programadas (rutinas)", desc:"Qué son y cómo se diseñan paso a paso."},
+    {t:12, titulo:"Ejercicio: crea tu propia rutina", desc:"Cada participante deja una rutina corriendo."},
+    {t:5,  titulo:"Cierre", desc:"Buenas prácticas, quiz y entregable."}
   ],
   contenido:[
-    {h:"¿Qué es un plugin o conector?", p:[
-      "Es una conexión directa entre la IA y una herramienta que ya usas —Google Drive, Gmail, un calendario— para que pueda leer o generar información ahí, en vez de que tú copies y pegues manualmente entre una aplicación y otra."
-    ]},
-    {h:"Conectores con mayor aplicación en KRAM", p:[], ul:[
-      "Google Drive / Sheets — para tomar reportes de venta o inventario y generar resúmenes.",
-      "Gmail / Outlook — para apoyar en la redacción y triage de correos con supervisores y proveedores.",
-      "Calendar — para organizar la agenda de visitas a tienda.",
-      "Slack / Teams — como alternativa más trazable al WhatsApp disperso que se usa hoy."
-    ]},
-    {h:"Buenas prácticas y límites de seguridad", p:[
-      "Antes de conectar cualquier herramienta, hay que revisar qué información va a poder ver o modificar la IA, y mantener siempre una revisión humana antes de que algo salga hacia un cliente, proveedor o tienda. Conectar no es lo mismo que automatizar sin supervisión."
-    ]}
+    {h:"¿Qué es un conector?", icon:"plug", p:[
+      "Un conector es un puente entre Claude y una herramienta que ya usas —Google Drive, Gmail, Outlook, un calendario, Slack o Teams— para que pueda leer o escribir información directamente ahí, en vez de que tú copies y pegues manualmente entre una aplicación y otra.",
+      "Hasta la Sesión 3, todo lo que hicimos dependía de que una persona pegara la información en la conversación: un texto, un reporte, una imagen. Un conector cambia eso: Claude va directo a la fuente —abre el correo, lee la hoja de cálculo, consulta el evento del calendario— siempre con los permisos que la persona autorizó de antemano, nunca por su cuenta.",
+      "Técnicamente un conector es un solo canal hacia una sola herramienta. No sabe qué quieres hacer con esa información: solo abre la puerta. La inteligencia de qué hacer con lo que hay detrás de esa puerta la pones tú en el prompt, o la pone un plugin."
+    ], clave:"Un conector es acceso, no criterio: abre la puerta a una herramienta con los permisos que tú autorizaste, pero no decide qué hacer adentro."},
+
+    {h:"Los conectores nativos de Claude", icon:"grid", p:[
+      "Anthropic (la empresa detrás de Claude) construye y mantiene un grupo específico de conectores nativos: listos para usar con solo autorizar tu cuenta, sin configuración técnica. Además de estos existe un directorio abierto con cientos de conectores de terceros —Asana, Notion, Linear, monday.com, ClickUp, Jira— que cualquiera puede agregar, pero que no son construidos directamente por Anthropic."
+    ], ul:[
+      "Google Drive — busca y trae tus archivos y documentos de Drive como contexto para una tarea.",
+      "Gmail — busca y lee tus correos (redacta borradores, pero no envía por su cuenta sin tu aprobación).",
+      "Google Calendar — consulta tu calendario y tus eventos programados.",
+      "Microsoft 365 — accede a SharePoint, OneDrive, Outlook y Teams (requiere cuenta de trabajo o escuela).",
+      "Slack — busca en canales y mensajes directos para traer contexto de conversaciones del equipo.",
+      "GitHub — accede a repositorios y archivos de código; contexto persistente de un proyecto técnico."
+    ], clave:"Los conectores nativos cubren correo, archivos, calendario, chat y código; para todo lo demás existe un directorio abierto de terceros."},
+
+    {h:"¿Qué es un plugin?", icon:"toolbox", p:[
+      "Un plugin es un paquete ya armado que se instala de una sola vez y deja a Claude listo para trabajar en un oficio específico —productividad, finanzas, marketing, diseño, datos— sin que tú tengas que configurar nada ni escribir instrucciones desde cero.",
+      "La diferencia con un conector es que un plugin no trae una sola pieza: trae las tres piezas que hacen falta para que algo funcione de inmediato. Viene con una descripción que le dice a Claude cuándo usarlo, viene con skills (instrucciones de trabajo ya escritas y probadas) y viene con los conectores que esas skills necesitan, ya declarados.",
+      "Piénsalo como la diferencia entre comprar un taladro suelto y comprar la caja de herramientas completa del electricista: el taladro es el conector, la caja —con las herramientas, el manual de cada procedimiento y los accesorios ya emparejados— es el plugin.",
+      "Cuando instalas un plugin, Claude no te pregunta qué hacer: ya sabe qué tareas cubre, cómo ejecutarlas paso a paso y a qué herramientas pedirles información. Tú solo autorizas las cuentas."
+    ], tabla:{
+      headers:["Pieza que trae el plugin","Qué contiene","Para qué sirve"],
+      rows:[
+        ["1. Descripción","Un texto corto que resume el propósito del plugin y las situaciones en las que aplica.","Es el disparador: Claude lee esa descripción y decide solo cuándo el plugin es relevante para lo que le pediste."],
+        ["2. Skills","Instrucciones de trabajo ya escritas: procedimientos paso a paso, formatos de salida, plantillas y criterios de calidad. Cada skill cubre una tarea concreta.","Garantizan que la misma tarea salga siempre igual de bien, la pida quien la pida. Es lo que vimos en la Sesión 3, pero ya empaquetado."],
+        ["3. Conectores declarados","La lista de herramientas que esas skills necesitan, ya emparejadas por categoría (chat, correo, calendario, gestor de proyectos, base de conocimiento).","Evitan la configuración técnica: al instalar, Claude ya sabe a qué herramientas pedir acceso; tú solo autorizas la cuenta."]
+      ]
+    }, ejemplo:{titulo:"Cómo se siente en la práctica", texto:"Sin plugin: escribes un prompt largo explicando cómo quieres tu lista de pendientes, de dónde sacar la información y en qué formato entregarla — y lo vuelves a escribir la próxima vez. Con plugin instalado: escribes /start y Claude ya crea tu lista, la conecta a tu correo y calendario, y usa el mismo formato todos los días."},
+      clave:"Un plugin no es una herramienta: es un oficio empaquetado —descripción, skills y conectores— listo para operar desde el minuto uno."},
+
+    {h:"Plugin vs. conector: la diferencia que importa", icon:"swap", p:[
+      "La confusión más común es tratarlos como sinónimos. No lo son, y la diferencia se nota en el momento en que algo sale mal: si el problema es que Claude no puede ver un archivo, es un tema de conector; si el problema es que lo vio pero no hizo bien el trabajo, es un tema de skill o de plugin.",
+      "En la práctica, un conector se instala para resolver acceso y un plugin se instala para resolver capacidad. Casi siempre se usan juntos: el plugin es el que decide qué pedir, el conector es el que va por ello."
+    ], tabla:{
+      headers:["","Conector","Plugin"],
+      rows:[
+        ["Qué es","Un canal hacia una sola herramienta.","Un paquete de trabajo completo."],
+        ["Qué aporta","Acceso a información (leer / escribir).","Criterio: qué hacer con esa información y cómo entregarla."],
+        ["Qué contiene","Solo la conexión y sus permisos.","Descripción + skills + los conectores que necesita."],
+        ["Quién lo diseña","Anthropic (nativos) o terceros del directorio.","Anthropic, la empresa que lo publica, o tú mismo."],
+        ["Se instala para","Que Claude deje de depender del copy-paste.","Que Claude ejecute un oficio de forma consistente."],
+        ["Analogía","El enchufe.","El electrodoméstico ya conectado y programado."],
+        ["Si falla","Claude no ve la información.","Claude ve la información pero el resultado sale mal o inconsistente."]
+      ]
+    }, clave:"El conector da acceso; el plugin da criterio. Un plugin casi siempre incluye conectores, pero un conector nunca incluye un plugin."},
+
+    {h:"Anatomía real: el plugin de Productividad", icon:"briefcase", p:[
+      "Para aterrizarlo, abrimos uno real. El plugin de Productividad es uno de los publicados por Anthropic y es el más transferible a la operación de KRAM, porque su materia prima son pendientes, juntas, correos y el contexto de quién es quién en la empresa.",
+      "Su descripción —la pieza 1— dice literalmente: gestiona tareas, planea tu día y acumula memoria del contexto importante de tu trabajo; se sincroniza con tu calendario, correo y chat para mantener todo organizado y a tiempo. Ese párrafo es el disparador: cuando le pides a Claude algo que huele a pendientes o a organización del día, este plugin se activa solo.",
+      "Sus skills —la pieza 2— son cuatro, y cada una resuelve un momento distinto del ciclo de trabajo. Ninguna es genérica: cada una trae su procedimiento escrito."
+    ], ul:[
+      "start — arranca el sistema: crea tu lista de tareas, tu memoria de trabajo y un tablero visual, y te hace las preguntas iniciales sobre tu rol, tu equipo y tus prioridades para sembrar el contexto.",
+      "task-management — administra la lista de pendientes en un archivo compartido: agrega tareas dichas en lenguaje natural, cambia estatus, detecta lo vencido y lo sincroniza con el gestor de proyectos.",
+      "memory-management — memoria en dos niveles: una memoria de trabajo para lo del día a día y un archivo profundo para personas, proyectos, apodos, siglas y lenguaje interno. Es lo que permite que entienda 'pásale el reporte de sell out a Chuy de la zona sur' sin explicarle quién es Chuy.",
+      "update — sincroniza y depura: jala asignaciones nuevas del gestor de proyectos, triaja lo vencido, llena huecos de memoria y, en modo profundo, barre correo, calendario y chat para cazar pendientes que quedaron enterrados en una conversación."
+    ], tabla:{
+      headers:["Categoría de conector","Qué resuelve dentro del plugin","Opciones que acepta"],
+      rows:[
+        ["Chat","Leer conversaciones de equipo para detectar compromisos y pendientes.","Slack, Microsoft Teams, Discord"],
+        ["Correo","Detectar pendientes enterrados en el buzón y redactar respuestas.","Microsoft 365 / Outlook, Gmail"],
+        ["Calendario","Planear el día, ver juntas y respetar disponibilidad real.","Microsoft 365, Google Calendar"],
+        ["Gestor de proyectos","Sincronizar tareas con la herramienta donde vive el proyecto.","Asana, Linear, Jira, monday.com, ClickUp"],
+        ["Base de conocimiento","Consultar documentación interna como contexto.","Notion, Confluence, Guru, Coda"],
+        ["Suite de oficina","Leer y generar archivos de trabajo.","Microsoft 365"]
+      ]
+    }, ejemplo:{titulo:"El detalle que hace la diferencia", texto:"El plugin no se amarra a una marca: define categorías ('un gestor de proyectos', 'un chat') y funciona con la herramienta que tú conectes. Por eso KRAM puede instalarlo con Microsoft 365 y Teams sin cambiar de herramientas ni pedirle nada a Sistemas."},
+      clave:"Descripción que dispara + cuatro skills que ejecutan + seis categorías de conectores que alimentan: eso es un plugin por dentro, y ese molde es exactamente el que usaríamos para construir uno propio de KRAM."},
+
+    {h:"¿Qué es una tarea programada (rutina)?", icon:"clock", p:[
+      "Una tarea programada —en inglés routine o scheduled task— es una instrucción que le dejas escrita a Claude una sola vez para que se ejecute sola, cada cierto tiempo, sin que tú estés ahí para pedirla.",
+      "Es el salto de 'yo le pregunto y él responde' a 'él entrega y yo reviso'. Tú defines el qué y el cuándo; Claude se encarga de que exista el resultado a esa hora, todos los lunes, sin que nadie se acuerde de pedirlo.",
+      "Hay una característica técnica que cambia por completo cómo se escribe una rutina: cada ejecución arranca en una conversación nueva, en blanco. La rutina no recuerda lo que platicaste en este chat ni lo que hizo la semana pasada. Todo lo que necesita saber tiene que estar escrito dentro de la rutina misma, o vivir en un Proyecto o en un archivo al que la rutina pueda entrar por un conector.",
+      "Por eso una rutina mal escrita falla en silencio: no es que se haya equivocado, es que nunca supo. Y por eso una rutina bien escrita es, en realidad, un prompt autosuficiente con hora."
+    ], clave:"Cada ejecución de una rutina empieza en blanco: si no está escrito dentro de la rutina o accesible por un conector, para ella no existe."},
+
+    {h:"Cómo se diseña una rutina: el paso a paso", icon:"repeat", p:[
+      "Diseñar una rutina no es escribir un prompt y ponerle hora. Es responder siete preguntas en orden, y el orden importa: el error más común es empezar por la frecuencia en vez de por el entregable."
+    ], ul:[
+      "1. Define el entregable, no la actividad. No 'revisar inventarios', sino 'una lista de los 10 SKU en riesgo de quiebre, ordenados por urgencia, con la tienda y el faltante'. Si no puedes describir la hoja que quieres recibir, todavía no tienes rutina.",
+      "2. Define el disparador. Cada cuándo corre: hora exacta, día, frecuencia y zona horaria. Regla práctica: que caiga 30 a 60 minutos antes del momento en que vas a usar el resultado, no a media noche.",
+      "3. Define las fuentes. De dónde saldrá la información: búsqueda web, un archivo en Drive o SharePoint, el correo, el calendario, un Proyecto con documentos cargados. Si la fuente no es alcanzable, la rutina no existe.",
+      "4. Escribe el prompt como instrucción autónoma. Redáctalo para alguien que llega nuevo: contexto de la empresa, quién eres, qué significa cada término interno, qué hacer si no encuentra datos. Nada de 'como platicamos', 'lo de siempre' o 'igual que la semana pasada'.",
+      "5. Define el formato y el destino. En qué forma quieres el resultado —tabla, cinco viñetas, borrador de correo, archivo— y a dónde llega: el chat, tu correo, una carpeta.",
+      "6. Define el límite. Qué NO puede hacer sola: no enviar correos hacia afuera, no modificar el inventario, no aprobar nada, no borrar. Todo lo que salga de KRAM o modifique un registro se entrega como borrador para que una persona lo apruebe.",
+      "7. Prueba, ajusta y programa. Ejecútala una vez en manual, revisa el resultado con ojo crítico, corrige el prompt y hasta entonces déjala programada. Y agéndate una revisión mensual: una rutina que nadie audita es una rutina que se degrada."
+    ], ejemplo:{titulo:"Antes y después del paso 4", texto:"Mal: 'cada lunes mándame el resumen de ventas'. Bien: 'Cada lunes a las 7:30 a.m. (hora CDMX) entra al archivo Sell Out Semanal en la carpeta Comercial de SharePoint, toma la pestaña de la semana que acaba de cerrar, compara contra las cuatro semanas previas y entrégame: 1) tres cadenas con mayor caída en porcentaje, 2) tres con mayor crecimiento, 3) una hipótesis por cada caída. Si el archivo no está actualizado, dímelo y no inventes cifras.'"},
+      clave:"El orden correcto es entregable, disparador, fuentes, prompt autónomo, formato, límite y prueba. Empezar por la hora es la forma más rápida de tener una rutina que nadie usa."},
+
+    {h:"Buenas prácticas y límites de seguridad", icon:"shield", p:[
+      "Antes de conectar cualquier herramienta hay que revisar qué información va a poder ver o modificar la IA, y mantener siempre una revisión humana antes de que algo salga hacia un cliente, proveedor o tienda. Conectar no es lo mismo que automatizar sin supervisión.",
+      "La regla práctica: un conector, un plugin o una rutina pueden leer y proponer, pero una persona debe aprobar cualquier acción que salga de KRAM hacia afuera —un correo a un proveedor, un mensaje a una cadena de tiendas— o que modifique un registro importante —un inventario, un presupuesto—. Es el mismo principio de human-in-the-loop de la Sesión 2, ahora aplicado a herramientas conectadas de verdad.",
+      "Con rutinas hay dos cuidados extra. El primero: como corren solas, un error se repite sin que nadie lo note; por eso toda rutina necesita dueño y revisión periódica. El segundo: una rutina que corre sola con permisos amplios es el punto de mayor riesgo del sistema, así que se le dan los permisos mínimos que necesita para su entregable, no todos los que tiene disponible la persona."
+    ], clave:"Leer y proponer, sí; enviar, modificar o aprobar, no sin una persona. Y toda rutina lleva dueño, permisos mínimos y revisión mensual."}
   ],
-  video:{id:"2eIwNLYamTE", titulo:"Conectar ChatGPT a Gmail, Google Drive, Outlook y más", nota:"Video corto (formato Short) en español, con un ejemplo directo de conectores en acción."},
+  videos:[
+    {id:"YPtCxa5XcKI", embed:false, titulo:"Video de la Sesión 4", nota:null}
+  ],
+  ejercicios:[
+    {
+      num:1,
+      titulo:"Tu primera rutina: el Radar del lunes",
+      objetivo:"Dejar corriendo, antes de que termine la sesión, una tarea programada semanal que no depende de ningún conector ni de permisos de la empresa: cualquier participante puede completarla desde su propia cuenta.",
+      pasos:[
+        "Elige tu tema de radar: algo que hoy revisas a mano o que nunca alcanzas a revisar. Ejemplos: novedades de tu categoría de producto, movimientos de las cadenas donde operas, cambios de precio de la competencia, noticias de tu zona geográfica.",
+        "Define el entregable en una sola frase: 'cinco hallazgos de la semana, cada uno en dos líneas, con una acción sugerida'. Escríbelo antes de tocar Claude.",
+        "Abre Claude y copia el prompt de abajo. Sustituye las partes entre corchetes por lo tuyo: tema, rol, zona y hora.",
+        "Pide a Claude que lo ejecute una vez en manual, ahí mismo, y revisa el resultado. ¿Te sirve tal cual? ¿Le sobra o le falta algo? Ajusta el texto del prompt hasta que la salida te guste.",
+        "Cuando el resultado te convenza, pídele a Claude que lo convierta en tarea programada semanal: 'conviértelo en una tarea programada que corra todos los lunes a las 8:00 a.m., hora de Ciudad de México'.",
+        "Verifica que quedó creada y anota su nombre. Confirma que la frecuencia y la hora son las que pediste.",
+        "Ponte un recordatorio para el lunes siguiente: cuando llegue el primer resultado automático, evalúalo y ajusta el prompt una vez más. Una rutina se afina en la segunda corrida, no en la primera."
+      ],
+      prompt:{titulo:"Prompt — Radar semanal", texto:"Quiero que me ayudes a crear una tarea programada semanal. Primero ejecútala una vez en manual para que yo valide el resultado; cuando te lo confirme, la programamos.\n\nCONTEXTO\nTrabajo en [tu puesto] en Comercializadora KRAM, una empresa de [distribución / promotoría en punto de venta] que opera en [tu zona o cadenas]. Mi responsabilidad principal es [describe en una línea]. No tengo tiempo de revisar a mano lo que está pasando en mi categoría y quiero que tú lo hagas por mí cada semana.\n\nTAREA\nCada lunes, busca en fuentes públicas de internet lo más relevante de los últimos 7 días sobre: [tu tema de radar — por ejemplo: lanzamientos y promociones de las marcas que compiten con nuestra categoría en tiendas de conveniencia y autoservicio en México].\n\nQUÉ QUIERO RECIBIR\nExactamente cinco hallazgos, ordenados del más al menos relevante para mi trabajo. Cada hallazgo con esta estructura:\n- Qué pasó (una línea, concreta, con dato o cifra si existe)\n- Por qué me importa a mí en [tu zona o cadenas] (una línea)\n- Qué podría hacer al respecto esta semana (una acción concreta y realizable, no un consejo genérico)\n\nCierra con una sola línea: el hallazgo al que le pondría más atención si solo pudiera atender uno.\n\nREGLAS\n- Si no encuentras cinco hallazgos que valgan la pena, entrégame solo los que sí valen y dímelo abiertamente. Prefiero tres buenos que cinco rellenos.\n- No inventes cifras, marcas ni fechas. Si un dato no está confirmado, márcalo como no confirmado.\n- Incluye la fuente de cada hallazgo.\n- Lenguaje directo, sin relleno corporativo. Máximo una cuartilla.\n- No envíes nada a nadie ni contactes a terceros: solo entrégame el resultado a mí.\n\nHORARIO\nLunes a las 8:00 a.m., hora de Ciudad de México."}
+    },
+    {
+      num:2,
+      titulo:"Tres rutinas avanzadas para desarrollar después",
+      objetivo:"Para quien quiera ir más lejos por su cuenta: tres rutinas de dificultad real, con conectores y validación humana. No son ejemplos genéricos: cada una resuelve un dolor concreto de la operación de KRAM. Elige una y desarróllala con los siete pasos del método.",
+      pasos:[
+        "A. VIGÍA DE QUIEBRES DE ANAQUEL — Frecuencia: diaria, 7:00 a.m. Conectores: SharePoint o Drive (archivo de inventario por tienda) y correo. Entregable: lista de los SKU por debajo del mínimo en cada tienda, ordenada por impacto en venta perdida, con el faltante en piezas y el borrador de correo al supervisor de zona ya redactado. Límite obligatorio: el correo se entrega como borrador; la rutina nunca lo envía. Dificultad real: definir el mínimo por SKU y por formato de tienda, no un mínimo general.",
+        "B. AUDITOR DE EJECUCIÓN EN PUNTO DE VENTA — Frecuencia: semanal, lunes. Conectores: la carpeta donde promotoría sube las fotos de exhibición y el archivo del planograma vigente. Entregable: reporte por tienda que compara la foto contra el planograma y marca en semáforo las desviaciones —faltante de frentes, producto mal ubicado, material POP ausente— con el ranking de tiendas peor ejecutadas de la semana. Dificultad real: definir criterios de desviación que sean objetivos y auditables, no interpretaciones.",
+        "C. RASTREADOR DE PRECIO Y PROMOCIÓN POR CADENA — Frecuencia: dos veces por semana. Conectores: búsqueda web sobre folletos digitales y tiendas en línea de las cadenas, más una hoja de cálculo donde la rutina acumula el histórico. Entregable: no un reporte, sino una alerta condicionada — la rutina solo te escribe cuando detecta un cambio de precio mayor a cierto porcentaje o una promoción nueva de un competidor directo; si no pasa nada, no te molesta. Dificultad real: que escriba en la hoja histórica sin duplicar filas, y calibrar el umbral para que no te sature ni te deje ciego.",
+        "Cómo desarrollarla: toma la que elegiste, abre los siete pasos del bloque 'Cómo se diseña una rutina' y responde uno por uno por escrito antes de tocar el teclado. El paso 6 —el límite— es el que decide si tu rutina es segura para producción."
+      ],
+      prompt:{titulo:"Prompt — Diseño guiado de una rutina avanzada", texto:"Quiero diseñar una tarea programada avanzada y necesito que me ayudes a construirla bien antes de programarla. No la crees todavía.\n\nLA RUTINA QUE QUIERO\n[Describe en dos o tres líneas cuál de las tres elegiste y qué quieres que haga.]\n\nMI CONTEXTO\nPuesto: [tu puesto] en Comercializadora KRAM.\nZona o cadenas que atiendo: [detállalo].\nHerramientas donde vive la información hoy: [SharePoint, Drive, Excel, correo, WhatsApp, etc.].\nQuién usa el resultado además de mí: [nombre y puesto, o 'solo yo'].\n\nLO QUE NECESITO DE TI\nGuíame por los siete pasos del método, uno a la vez. No avances al siguiente hasta que yo conteste el actual:\n1. Entregable — ayúdame a describir con precisión la hoja o el mensaje exacto que quiero recibir, incluyendo columnas o secciones.\n2. Disparador — propón frecuencia y hora, y dime por qué esa y no otra.\n3. Fuentes — dime exactamente qué archivos o conectores hacen falta y qué pasa si alguno no está disponible ese día.\n4. Prompt autónomo — redáctamelo completo, asumiendo que quien lo ejecuta no sabe nada de KRAM ni de mí.\n5. Formato y destino — proponme el formato de salida y dónde debe quedar el resultado.\n6. Límite — enlista explícitamente qué NO debe hacer la rutina por su cuenta y qué debe dejar como borrador para aprobación humana.\n7. Prueba — dime cómo validar que funcionó bien la primera vez y qué señal indicaría que se está degradando.\n\nAl final, entrégame el prompt final en un solo bloque, listo para programar, y una lista de los permisos mínimos que requiere. Señala cualquier punto donde creas que la rutina podría fallar en silencio."}
+    }
+  ],
   quiz:[
-    {q:"Un plugin o conector de IA sirve principalmente para:", opts:["Cambiar el idioma del modelo","Conectar la IA directamente con tus herramientas de trabajo (correo, hojas de cálculo, calendario, etc.)","Hacer más lenta la IA","Bloquear el acceso a internet"], correct:1},
-    {q:"¿Cuál de los siguientes es un ejemplo de conector nativo relevante para KRAM?", opts:["Un microondas inteligente","Google Drive/Sheets para reportes de venta e inventarios","Un lector de código de barras físico","Una impresora térmica"], correct:1},
-    {q:"Conectar la IA al correo (Gmail/Outlook) permitiría, por ejemplo:", opts:["Enviar correos sin que nadie los revise nunca","Ayudar a redactar o resumir correos, siempre con supervisión humana antes de enviarlos","Eliminar la bandeja de entrada","Cambiar la contraseña automáticamente"], correct:1},
-    {q:"Antes de conectar cualquier plugin a información sensible de la empresa, es importante:", opts:["No hacer nada, no hay riesgo","Validar qué permisos tiene y qué datos va a poder ver o modificar la IA","Compartir la contraseña con todo el equipo","Desactivar cualquier supervisión"], correct:1},
-    {q:"En el video de esta sesión se muestra un ejemplo de:", opts:["Un modelo aprendiendo desde cero","Cómo conectar la IA con herramientas como Gmail, Drive u Outlook","Cómo diseñar un logotipo","Cómo instalar una impresora"], correct:1},
-    {q:"¿Qué debes entregar como parte del quiz de esta sesión?", opts:["Nada, es solo para ver el video","Un párrafo describiendo un proceso real de tu día a día que conectarías a un plugin y qué reemplazaría","Una foto de tu credencial","El manual de usuario de KRAM"], correct:1}
+    {q:"¿Cuál es la diferencia central entre un conector y un plugin?", opts:["No hay diferencia, son sinónimos","El plugin solo sirve para programadores","El conector da acceso a una herramienta; el plugin trae además el criterio de trabajo (descripción, skills y conectores)","El conector cuesta dinero y el plugin es gratis"], correct:2},
+    {q:"Un plugin viene preconstruido con tres piezas. ¿Cuáles son?", opts:["Descripción que lo dispara, skills con los procedimientos y los conectores que necesita","Usuario, contraseña y licencia","Un video, un manual y un examen","Base de datos, servidor y respaldo"], correct:0},
+    {q:"En el plugin de Productividad, ¿para qué sirve la skill de memoria (memory-management)?", opts:["Para guardar contraseñas","Para aumentar la velocidad de respuesta","Para borrar conversaciones viejas","Para que Claude entienda tu lenguaje interno: personas, proyectos, apodos y siglas de la empresa"], correct:3},
+    {q:"¿Por qué una tarea programada debe escribirse como instrucción autónoma?", opts:["Por elegancia en la redacción","Porque cada ejecución arranca en una conversación nueva, sin memoria de tu chat ni de corridas anteriores","Porque así consume menos energía","Porque el sistema no acepta textos largos"], correct:1},
+    {q:"Al diseñar una rutina, ¿cuál es el primer paso correcto?", opts:["Definir la hora a la que va a correr","Conectar todas las herramientas disponibles","Definir con precisión el entregable que quieres recibir","Escribir el prompt lo más corto posible"], correct:2},
+    {q:"Una rutina detecta un quiebre de inventario y redacta el correo al proveedor. ¿Qué debe pasar?", opts:["Enviarlo automáticamente para ganar tiempo","Enviarlo solo si es urgente","Borrarlo y avisar por WhatsApp","Dejarlo como borrador para que una persona lo revise y apruebe antes de salir"], correct:3}
   ],
-  entregable:{tipo:"texto", etiqueta:"Describe un proceso real que conectarías a un plugin", ayuda:"En un párrafo (mínimo 3 líneas): ¿qué proceso de tu día a día conectarías, a qué herramienta, y qué pasos manuales reemplazaría?"}
+  entregable:{tipo:"texto", etiqueta:"Comparte la rutina que creaste", ayuda:"En un párrafo: ¿qué rutina dejaste programada, cada cuándo corre, de dónde toma la información, qué te entrega y qué límite le pusiste (qué NO puede hacer sola)?"}
 },
 {
   id:5, slug:"sesion-5",
   titulo:"Agentes punta a punta: hacia dónde va KRAM",
   navLabel:"Agentes Punta a Punta",
   objetivo:"Al terminar, cada participante documenta un proceso de su área candidato a volverse agéntico de principio a fin, con sus pasos y un punto de revisión humana.",
-  ladderFocus:[], ladderPreview:[6],
+  ladderFocus:[], ladderPreview:[],
   agenda:[
     {t:10, titulo:"Recapitulando la escalera completa", desc:"De dónde partimos a dónde llegamos."},
     {t:10, titulo:"¿Qué es un agente punta a punta?", desc:"Varios pasos, una sola cadena."},
     {t:5,  titulo:"Video", desc:"Un agente controlando un proceso completo."},
-    {t:15, titulo:"Casos candidatos en KRAM", desc:"A futuro, no en este programa."},
+    {t:12, titulo:"Cómo se ve esto en otras empresas", desc:"Casos reales de otros giros (Curative, Klarna)."},
     {t:10, titulo:"Por qué el humano sigue al mando", desc:"Gobernanza básica."},
+    {t:12, titulo:"El pensamiento crítico no se delega", desc:"Caso real: Starbucks y la validación antes de producción."},
+    {t:12, titulo:"El horizonte final: Modelo Operativo Agéntico", desc:"Los 6 conceptos y la conclusión sobre NMO y ROI."},
     {t:10, titulo:"Cierre del programa", desc:"Qué sigue después de estas 5 sesiones."},
     {t:5,  titulo:"Quiz final", desc:"Instrucciones y entregable."}
   ],
   contenido:[
-    {h:"¿Qué es un agente punta a punta?", p:[
-      "Es un agente que encadena varios pasos —recibir información, analizarla, generar un resultado, notificar a alguien— sin que una persona tenga que intervenir en cada paso individual. La persona sigue definiendo las reglas y revisando los puntos críticos, pero ya no hace el trabajo manual de cada eslabón."
-    ]},
-    {h:"Casos candidatos en KRAM (a futuro)", p:[
-      "Ninguno de estos se implementa en este programa: son ejemplos para dimensionar el horizonte hacia el que puede evolucionar la operación."
+    {h:"¿Qué es un agente punta a punta?", icon:"linkchain", p:[
+      "Es un agente que encadena varios pasos —recibir información, analizarla, generar un resultado, notificar a alguien— sin que una persona tenga que intervenir en cada paso individual. La persona sigue definiendo las reglas y revisando los puntos críticos, pero ya no hace el trabajo manual de cada eslabón.",
+      "La diferencia con lo visto en la Sesión 4 es de alcance: un conector le da a la IA acceso a una herramienta puntual (leer un correo, abrir una hoja de cálculo). Un agente punta a punta encadena varios de esos accesos en un solo flujo continuo — por ejemplo, leer un archivo, analizarlo, redactar un resultado y notificar a alguien, todo en una sola cadena, con una persona revisando el resultado final o los puntos que se definieron como críticos."
+    ], clave:"Un conector da acceso a una herramienta puntual; un agente punta a punta encadena varios accesos en un solo flujo continuo."},
+    {h:"Cómo se ve esto en otras empresas (de otros giros)", icon:"forward", p:[
+      "Esto no es una propuesta de lo que KRAM debe construir ni una discusión de alcance para este programa: son ejemplos reales, de empresas de otros giros, para dimensionar hacia dónde puede evolucionar una operación cuando decide llevar los agentes hasta el final de un proceso."
     ], ul:[
-      "De una foto de anaquel a un reporte de quiebre de stock.",
-      "De un reporte de venta semanal a un resumen ejecutivo automático por zona.",
-      "De un correo de un proveedor a una actualización de inventario."
-    ]},
-    {h:"Por qué el humano sigue al mando", p:[
-      "Entre más autónomo es un agente, más importa definir con claridad dónde interviene una persona: quién aprueba, quién revisa, quién es responsable del resultado final. Esta idea —gobernanza básica— es la base de cualquier conversación seria sobre agentes, y se profundiza en programas posteriores."
-    ]},
-    {h:"Cierre del programa", p:[
-      "Con estas 5 sesiones, el equipo de KRAM cuenta con fundamentos sólidos (Niveles 1-2), experiencia práctica con Claude Design (Nivel 3) y una primera exposición a conectores (Nivel 5), además de haber visto hacia dónde puede evolucionar la operación con agentes punta a punta. Los niveles 4 y 6 completos, y la implementación real de agentes, son el siguiente tramo del camino — fuera del alcance de este programa básico."
-    ]}
+      "Curative (aseguradora de salud, EUA): en lugar de renovar un contrato de software de atención a clientes de aproximadamente 600 mil dólares al año, su equipo construyó una herramienta propia con IA generativa en cerca de 2 meses, hecha a la medida de cómo trabaja la aseguradora — sin depender de un proveedor externo para cada ajuste.",
+      "Klarna (fintech / banca digital, Europa): consolidó datos que antes vivían repartidos en varios sistemas de terceros hacia infraestructura propia, y sumó un asistente con IA para atención a clientes — con ahorros reportados del orden de 40 millones de dólares al año.",
+      "El patrón común no es \"reemplazar personas por un chatbot\": es que la empresa entendió tan bien su propio proceso que pudo construir (o adaptar con inputs directos) una herramienta propia en lugar de depender por completo de un sistema externo genérico."
+    ], clave:"El punto no es que KRAM deba construir su propio ERP o CRM: es entender que un proceso bien entendido y bien documentado es lo que hace posible, más adelante, decidir con criterio qué construir, qué adaptar y qué dejar como está."},
+    {h:"Por qué el humano sigue al mando", icon:"usercheck", p:[
+      "Entre más autónomo es un agente, más importa definir con claridad dónde interviene una persona: quién aprueba, quién revisa, quién es responsable del resultado final. Esta idea —gobernanza básica— es la base de cualquier conversación seria sobre agentes, y se profundiza en programas posteriores.",
+      "Esto no es una limitación temporal mientras \"la tecnología mejora\": incluso en las organizaciones más avanzadas en el uso de agentes, hay puntos de revisión humana definidos a propósito — no porque el agente no pueda seguir solo, sino porque hay decisiones (las que afectan dinero, a un cliente, o la reputación de la empresa) que siempre deben tener a una persona respondiendo por ellas."
+    ], clave:"Incluso en las organizaciones más avanzadas en IA, hay decisiones que siempre debe responder una persona."},
+    {h:"El pensamiento crítico no se delega", icon:"magnifier", p:[
+      "Hay una tarea que ningún agente, por avanzado que sea, puede hacer por ti: decidir si su resultado realmente está bien. Ese juicio —revisar, cuestionar, validar antes de dar por bueno un resultado— es pensamiento crítico, y es justo la parte que no se delega, sobre todo antes de llevar algo a producción (es decir, antes de que ese resultado empiece a usarse de verdad en la operación, no solo en una prueba).",
+      "Un caso real y reciente lo ilustra bien: en septiembre de 2025, Starbucks lanzó en más de 11,300 tiendas de Norteamérica una herramienta de visión por computadora para contar inventario automáticamente a partir de fotos de refrigeradores y anaqueles. En pruebas controladas llegó a 99% de precisión — un resultado excelente sobre el papel. Pero en la operación real, los reflejos de luz en las puertas de acero de los refrigeradores duplicaban conteos (por ejemplo, leche de avena marcada como \"5\" aparecía como \"10\"), el empaque de temporada obligaba a reentrenar el modelo hasta por 6 semanas cada vez, y los sistemas de back-end de la empresa (de los años 90) no podían procesar la información en tiempo real. Starbucks canceló el proyecto en abril de 2026, después de invertir más de 10 millones de dólares en varios años, y regresó al conteo manual.",
+      "La lección no es \"la IA falló\": es que 99% de precisión en pruebas no es lo mismo que \"funciona bien en producción\", y que nadie validó a fondo esa diferencia antes de escalarlo a miles de tiendas. Ser responsable con la IA significa exactamente eso: no asumir que un resultado está bien solo porque lo generó la IA, sino comprobarlo — especialmente cuando ese resultado va a pasar a usarse de verdad, y más todavía cuando se escala rápido y a gran tamaño."
+    ], clave:"99% de precisión en una prueba no es lo mismo que \"funciona en producción\". Antes de escalar algo hecho con IA, alguien tiene que validarlo — esa responsabilidad no se delega."},
+    {h:"El horizonte final: el Modelo Operativo Agéntico", icon:"target", p:[
+      "Estos seis conceptos describen hacia dónde apuntan (o ya operan) las empresas con un Nivel de Madurez Organizacional (NMO) avanzado — Nivel 5 en adelante. No son el punto de partida de este programa: son el mapa del terreno completo, para que el equipo de KRAM sepa que existe y entienda, en términos generales, de qué se trata cada pieza."
+    ], tabla:{headers:["Concepto","En qué consiste"], rows:[
+      ["ROI Agéntico (Return on Agentic Investment)","El retorno de la inversión hecha en agentes: no basta con que un agente funcione técnicamente, tiene que devolver más valor (tiempo, dinero, calidad) del que costó construirlo y mantenerlo."],
+      ["Soberanía de Datos (Data Sovereignty)","Quién controla, dónde vive y bajo qué reglas se usa la información de la empresa cuando la IA participa en los procesos — no depender por completo de que un tercero decida esas reglas por ti."],
+      ["Ecosistema Agéntico (Organización Agéntica)","Un conjunto de agentes que colaboran entre sí dentro de la empresa, no agentes aislados uno por proceso, sino una red coordinada de automatización."],
+      ["Agency Transfer (Transferencia de Agencia)","El proceso deliberado de decidir qué decisiones se le transfieren a un agente y cuáles se quedan con una persona — es una decisión de gobernanza, no algo que ocurre solo."],
+      ["Negocio AI-Native (AI-Native Business)","Una empresa diseñada desde cero alrededor de la IA, no una empresa tradicional a la que se le \"agrega\" IA encima de procesos ya existentes."],
+      ["Organización Agéntica (Agentic Organization)","El modelo operativo completo de una empresa una vez transformada alrededor de agentes: la meta final de este camino, no el punto de partida de este programa."]
+    ]}, clave:"Conclusión: más IA no es necesariamente mejor. El nivel de agentización correcto depende del Nivel de Madurez Organizacional (NMO) de cada empresa, y siempre debe apuntar a un retorno esperado concreto, con niveles claros y un plan estructurado que haga posible llegar ahí — no a acumular herramientas de IA por acumularlas."},
+    {h:"Cierre del programa", icon:"flag", p:[
+      "Con estas 5 sesiones, el equipo de KRAM cuenta con fundamentos sólidos (Niveles 1-2), experiencia práctica con Claude Design (Nivel 3) y una primera exposición a conectores (Nivel 5), además de haber visto hacia dónde puede evolucionar la operación con agentes punta a punta. Los niveles 4 y 6 completos, y la implementación real de agentes, son el siguiente tramo del camino — fuera del alcance de este programa básico.",
+      "Lo más importante que debería quedar de estas 5 sesiones no es un truco puntual, sino un cambio de hábito: antes de hacer manualmente una tarea repetitiva de análisis, reporte o redacción, preguntarse primero si la IA puede ayudar a llegar más rápido a un mejor resultado — y saber, con criterio, cuándo sí y cuándo no conviene usarla."
+    ], clave:"El cambio de hábito que debe quedar: antes de hacer una tarea repetitiva a mano, preguntarte si la IA puede ayudarte a llegar más rápido a un mejor resultado."}
   ],
-  video:{id:"l64_9_dM57w", titulo:"Manus AI: un agente autónomo automatizando tareas de principio a fin", nota:"⚠ No pudimos verificar de forma automática la duración exacta de este video (YouTube bloqueó la consulta). Revísalo antes de tu sesión en vivo; si dura más de 5 minutos, usa solo el fragmento más representativo o sustitúyelo."},
+  videos:[
+    {id:"RjnqrKK3QoQ", titulo:"Le pedí a Claude un agente de WhatsApp con CRM y esto fue el resultado (canal Kevin Belier | Soluciones IA)", nota:null}
+  ],
   quiz:[
     {q:"Un agente \"punta a punta\" (end-to-end) se caracteriza por:", opts:["Responder una sola pregunta y terminar","Encadenar varios pasos (recibir, analizar, decidir, generar, notificar) sin intervención manual en cada paso","Solo funcionar en modo offline","Reemplazar por completo al equipo humano"], correct:1},
     {q:"En la escalera de niveles vista en el programa, un agente punta a punta corresponde a:", opts:["El nivel más básico (Nivel 1)","Un nivel avanzado (Nivel 6), fuera del alcance de este programa básico","Ningún nivel en particular","Lo mismo que un simple chat"], correct:1},
     {q:"Aun con agentes avanzados, ¿por qué sigue siendo importante la supervisión humana?", opts:["No es necesaria","Para revisar decisiones importantes, corregir errores y asumir la responsabilidad final","Solo por costumbre","Porque la ley lo prohíbe todo"], correct:1},
     {q:"Un proceso candidato a volverse agéntico en KRAM podría ser:", opts:["Firmar el contrato individual de trabajo","El seguimiento de inventario en tienda hasta la generación de un reporte de reabastecimiento","La decisión final de despido de un colaborador","Ninguno, no aplica en consumo masivo"], correct:1},
     {q:"Después de estas 5 sesiones, el nivel que alcanza el equipo de KRAM es:", opts:["Experto, listo para operar agentes autónomos sin supervisión","Básico-intermedio: fundamentos sólidos y primeras herramientas prácticas","Nulo, no se avanzó nada","Nivel de desarrollador de modelos de IA"], correct:1},
+    {q:"Los ejemplos de Curative y Klarna en esta sesión se presentan para:", opts:["Proponer que KRAM construya su propio ERP o CRM de inmediato","Mostrar, con casos reales de otros giros, hacia dónde puede evolucionar una operación cuando entiende bien sus propios procesos — sin ser una propuesta para KRAM","Comparar el presupuesto de KRAM contra el de esas empresas","Explicar cómo cancelar contratos con proveedores"], correct:1},
+    {q:"En el caso real de Starbucks visto en esta sesión, ¿cuál fue la lección principal?", opts:["Que la IA nunca funciona en retail","Que 99% de precisión en pruebas no garantiza que algo funcione bien en producción, y por eso hay que validar antes de escalar","Que el conteo manual es siempre mejor que cualquier tecnología","Que Starbucks dejó de usar IA por completo en todas sus áreas"], correct:1},
+    {q:"¿Qué significa que el pensamiento crítico \"no se delega\" al trabajar con IA?", opts:["Que nunca se debe usar la IA","Que la responsabilidad de revisar y validar un resultado antes de usarlo sigue siendo de una persona, sin importar qué tan avanzado sea el agente","Que solo el área de sistemas puede usar IA","Que la IA debe revisar su propio trabajo sin supervisión"], correct:1},
+    {q:"Según la conclusión sobre el Modelo Operativo Agéntico visto en esta sesión, ¿más IA es siempre mejor para una empresa?", opts:["Sí, siempre y en cualquier empresa","No necesariamente: depende del Nivel de Madurez Organizacional (NMO) de la empresa y de si hay un plan estructurado que apunte a un retorno esperado","Sí, pero solo si la empresa es grande","No, la IA nunca genera retorno"], correct:1},
     {q:"¿Qué debes entregar como parte del quiz final?", opts:["Nada","Un mapa de una página describiendo un proceso de tu área candidato a volverse agéntico a futuro","Tu opinión personal sobre la empresa","Un examen de programación"], correct:1}
   ],
   entregable:{tipo:"texto+file", etiqueta:"Mapa de proceso: un caso candidato a volverse agéntico en tu área", ayuda:"Descríbelo en texto (pasos + 1 punto de revisión humana) y, si quieres, adjunta también un diagrama o imagen."}
 }
+];
+
+/* =========================================================================
+   DIAPOSITIVAS DE LA PÁGINA "INICIO" — marco histórico, familia de modelos
+   Claude, modos de razonamiento y la escalera de niveles.
+   ========================================================================= */
+const INICIO_SLIDES = [
+  {type:"cover", tag:"Bienvenida", h:"Antes de empezar: el mapa completo de este programa",
+    p:[
+      "En las próximas 5 sesiones vamos a construir, paso a paso, una forma de trabajo con inteligencia artificial para el personal de KRAM seleccionado para este programa.",
+      "Antes de entrar a la Sesión 1, vale la pena ubicar tres cosas: de dónde viene todo esto, quién es \"Claude\" en concreto, y qué tan lejos llega este programa. Eso es lo que cubren las siguientes diapositivas."
+    ]},
+  {type:"timeline", h:"Marco histórico de la Inteligencia Artificial y sus orígenes",
+    intro:"La IA no es un invento de los últimos años. Es un campo con más de 70 años de historia, con avances y \"inviernos\" a lo largo del camino.",
+    items:[
+      {year:"1950", title:"Alan Turing y la pregunta original", desc:"El matemático británico Alan Turing publica \"Computing Machinery and Intelligence\" y propone el \"Test de Turing\": ¿puede una máquina conversar de forma indistinguible de una persona?"},
+      {year:"1956", title:"Nace el término \"Inteligencia Artificial\"", desc:"En Dartmouth College (Estados Unidos), un grupo de investigadores encabezado por John McCarthy acuña el término durante un taller de verano. Es el nacimiento formal del campo."},
+      {year:"1966", title:"Primeros programas conversacionales", desc:"ELIZA, uno de los primeros \"chatbots\", simula una conversación con reglas simples de texto — sin entender realmente el lenguaje."},
+      {year:"1997", title:"Deep Blue vence a Kasparov", desc:"La computadora de IBM gana al campeón mundial de ajedrez, mostrando el poder de la IA especializada en una tarea concreta."},
+      {year:"2012", title:"El Deep Learning despega", desc:"Una red neuronal (AlexNet) supera por un margen enorme a los métodos anteriores en reconocimiento de imágenes, detonando la era moderna del aprendizaje profundo."},
+      {year:"2017", title:"Llega el Transformer", desc:"Investigadores de Google publican \"Attention Is All You Need\", la arquitectura técnica que hoy es la base de todos los LLM, incluido Claude."},
+      {year:"2022", title:"La IA generativa se vuelve masiva", desc:"ChatGPT llega al público general y millones de personas usan un LLM por primera vez — el punto de partida real de la mayoría del equipo de KRAM hoy."},
+      {year:"2023–2026", title:"De chatbots a agentes", desc:"Claude y otros asistentes evolucionan de responder preguntas a poder usar herramientas y actuar — el tema central de este programa."}
+    ]},
+  {type:"tiers", h:"La familia de modelos Claude", badge:true, badgeLabel:"Claude",
+    intro:"Claude no es un solo modelo: es una familia con distintos niveles, pensados para diferentes balances entre costo, velocidad y capacidad.",
+    items:[
+      {name:"Haiku", desc:"El más rápido y económico. Ideal para tareas simples y de alto volumen."},
+      {name:"Sonnet", desc:"El balance por defecto para la gran mayoría del trabajo del día a día.", highlight:true},
+      {name:"Opus", desc:"Para trabajo más exigente, por encima de lo que Sonnet resuelve bien."},
+      {name:"Fable", desc:"El nivel más capaz: razonamiento, código y trabajo agéntico más demandante, donde la máxima inteligencia es la prioridad."}
+    ],
+    note:"Recomendación práctica: empezar con Sonnet, subir de nivel solo cuando la tarea lo exija de verdad, y bajar a Haiku para tareas simples y repetitivas. Este panorama de modelos evoluciona con el tiempo — confírmalo en platform.claude.com/docs."},
+  {type:"content", badge:true, badgeLabel:"Claude", h:"¿El modelo \"piensa\" antes de responder?",
+    p:[
+      "Elegir qué modelo usar (Haiku, Sonnet, Opus, Fable) es una decisión. Si ese modelo \"piensa\" antes de responder es una decisión aparte, independiente de cuál elijas.",
+      "En los modelos más recientes, esto funciona con \"pensamiento adaptativo\": el propio modelo decide cuándo y cuánto conviene pensar antes de contestar, y tú puedes ajustar qué tan a fondo lo hace.",
+      "Este razonamiento extra vale la pena en problemas difíciles, de varios pasos — y es un gasto innecesario en una simple consulta o clasificación rápida."
+    ], clave:"Elegir el modelo (qué tan capaz) y activar el pensamiento adaptativo (cuánto razona antes de responder) son dos decisiones independientes."},
+  {type:"ladder", h:"La escalera de niveles de conocimiento de Claude",
+    caption:"Este es el mapa de referencia que vamos a usar en las 5 sesiones. Cada una señala en qué peldaño está trabajando. El programa capacita de forma práctica del Nivel 1 al Nivel 5 — el Nivel 6 aparece aquí solo como referencia de contexto, no como algo que este programa vaya a capacitar."},
+  {type:"sessions", h:"Las 5 sesiones del programa"}
 ];
 </script>
 <script>
@@ -499,7 +979,10 @@ const $nav = document.getElementById('mainNav');
 function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function fmtDate(d){
   try{
-    return new Date(d).toLocaleString('es-MX', {weekday:'long', day:'2-digit', month:'long', hour:'2-digit', minute:'2-digit'});
+    // Se fija explícitamente la zona horaria de Ciudad de México: sin esto, el navegador
+    // formatea la fecha en la zona horaria local del dispositivo de quien la ve, y alguien
+    // fuera de México (o con su equipo mal configurado) vería una hora distinta a la real.
+    return new Date(d).toLocaleString('es-MX', {weekday:'long', day:'2-digit', month:'long', hour:'2-digit', minute:'2-digit', timeZone:'America/Mexico_City'});
   }catch(e){ return d; }
 }
 function sessionEnd(session){
@@ -512,7 +995,20 @@ function quizWindow(session){
   const close = open + CONFIG.QUIZ_WINDOW_HOURS*3600000;
   return {open, close};
 }
+/* Excepción manual: un link con ?excepcion=<CONFIG.EXCEPTION_CODE>&s=<id de sesión>
+   fuerza el quiz de esa sesión a 'open' para quien lo abra, sin importar la ventana
+   de horario ni si ya lo había contestado en ese navegador. No afecta a nadie más:
+   solo aplica a quien entra con ese link exacto. */
+function tieneExcepcion(session){
+  try{
+    const params = new URLSearchParams(location.search);
+    const code = params.get('excepcion');
+    const s = params.get('s');
+    return !!(code && CONFIG.EXCEPTION_CODE && code === CONFIG.EXCEPTION_CODE && String(s) === String(session.id));
+  }catch(e){ return false; }
+}
 function quizStateNow(session){
+  if(tieneExcepcion(session)) return 'open';
   const now = Date.now();
   const {open, close} = quizWindow(session);
   const localDone = localStorage.getItem('kia_done_'+session.id);
@@ -526,6 +1022,220 @@ function getPerfil(){
   catch(e){ return {nombre:'', puesto:''}; }
 }
 function setPerfil(p){ localStorage.setItem('kia_perfil', JSON.stringify(p)); }
+
+/* ---------- iconos inline (sin dependencias externas) ---------- */
+function presentIcon(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>'; }
+function playSvg(){ return '<svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>'; }
+function claudeMarkSvg(){ return '<span class="claude-mark"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>'; }
+function claudeChip(label){ return `<div class="claude-chip">${claudeMarkSvg()}${esc(label||'Claude')}</div>`; }
+
+/* ---------- iconos decorativos para las slides de contenido (dan variedad visual sin depender de imágenes) ---------- */
+const CONTENT_ICONS = {
+  lightbulb: '<path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"/>',
+  forward: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  cpu: '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
+  hash: '<path d="M4 9h16M4 15h16M10 3L7 21M17 3l-3 18"/>',
+  chat: '<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.2 0-2.3-.2-3.4-.7L4 21l1.7-5A8.5 8.5 0 1 1 21 11.5z"/>',
+  stairs: '<path d="M3 21v-4h4v-4h4v-4h4v-4h4v16z"/>',
+  shuffle: '<path d="M17 3l4 4-4 4M3 7h6.5c1.8 0 3 .8 3.8 2l2.4 3c.8 1.2 2 2 3.8 2H21M3 21h6.5c1.8 0 3-.8 3.8-2l.4-.6M17 21l4-4-4-4"/>',
+  bolt: '<path d="M13 2 4 14h6l-1 8 9-12h-6z"/>',
+  layers: '<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17l9 5 9-5"/>',
+  swap: '<path d="M7 7h11M18 7l-3-3M18 7l-3 3M17 17H6M6 17l3 3M6 17l3-3"/>',
+  palette: '<path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2s-.5-1.5-1-2 .2-2 1.5-2H17a3 3 0 0 0 3-3 8 8 0 0 0-8-9z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="10.5" cy="7" r="1"/><circle cx="15" cy="8" r="1"/>',
+  grid: '<rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/>',
+  sliders: '<circle cx="12" cy="6" r="2"/><path d="M4 6h6M16 6h4"/><circle cx="7" cy="12" r="2"/><path d="M4 12h1M11 12h9"/><circle cx="17" cy="18" r="2"/><path d="M4 18h11M21 18h-2"/>',
+  repeat: '<path d="M17 2l4 4-4 4M3 12v-2a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 12v2a4 4 0 0 1-4 4H3"/>',
+  plug: '<path d="M9 2v6M15 2v6M6 8h12l-1 6a5 5 0 0 1-10 0z"/><path d="M12 16v6"/>',
+  shield: '<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/>',
+  linkchain: '<path d="M9 15l6-6"/><path d="M8 12l-2 2a3 3 0 0 0 4 4l2-2"/><path d="M16 12l2-2a3 3 0 0 0-4-4l-2 2"/>',
+  usercheck: '<circle cx="8" cy="8" r="4"/><path d="M2 21c0-4 3-6 6-6s6 2 6 6"/><path d="M15 13l2 2 4-4"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
+  toolbox: '<rect x="2" y="8" width="20" height="12" rx="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M2 13h20"/><path d="M10 13v1.5M14 13v1.5"/>',
+  briefcase: '<rect x="2" y="7" width="20" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M2 13h20"/>',
+  magnifier: '<circle cx="10" cy="10" r="7"/><path d="M21 21l-5.2-5.2"/>',
+  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/>'
+};
+function contentIconSvg(name){
+  const path = CONTENT_ICONS[name] || CONTENT_ICONS.lightbulb;
+  return `<div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${path}</svg></div>`;
+}
+function claveMarkSvg(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>'; }
+
+/* ---------- motor de diapositivas (usado en Inicio y en cada sesión) ---------- */
+function slideBodyHtml(slide){
+  switch(slide.type){
+    case 'cover': {
+      const ps = (slide.p||[]).map(t=>`<p>${esc(t)}</p>`).join('');
+      return `<div class="stag">${esc(slide.tag||'')}</div><h2>${esc(slide.h)}</h2>${ps}`;
+    }
+    case 'content': {
+      const badge = slide.badge ? claudeChip(slide.badgeLabel) : '';
+      const icon = (!slide.badge && slide.icon) ? contentIconSvg(slide.icon) : '';
+      const ps = (slide.p||[]).map(t=>`<p>${esc(t)}</p>`).join('');
+      const ul = slide.ul ? `<ul>${slide.ul.map(li=>`<li>${esc(li)}</li>`).join('')}</ul>` : '';
+      const tabla = slide.tabla ? `<div class="content-table-wrap"><table class="content-table">
+          <thead><tr>${slide.tabla.headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead>
+          <tbody>${slide.tabla.rows.map(row=>`<tr>${row.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody>
+        </table></div>` : '';
+      const ej = slide.ejemplo ? `<div class="example-box"><div class="ex-tag">${esc(slide.ejemplo.titulo||'Ejemplo')}</div><p>${esc(slide.ejemplo.texto)}</p></div>` : '';
+      const cl = slide.clave ? `<div class="clave-box"><span class="cl-mark">${claveMarkSvg()}</span><div class="cl-body"><div class="cl-tag">Punto clave</div><p>${esc(slide.clave)}</p></div></div>` : '';
+      return `${icon}${badge}<h3>${esc(slide.h)}</h3>${ps}${ul}${tabla}${ej}${cl}`;
+    }
+    case 'ladder': {
+      const cap = slide.caption ? `<p>${esc(slide.caption)}</p>` : '';
+      return `<h3>${esc(slide.h||'La escalera de niveles de conocimiento de Claude')}</h3>${cap}${renderLadder(slide.focus||[], slide.preview||[])}`;
+    }
+    case 'timeline': {
+      const intro = slide.intro ? `<p>${esc(slide.intro)}</p>` : '';
+      const items = (slide.items||[]).map(it=>`
+        <div class="t-item">
+          <div class="t-rail"><div class="t-dot"></div><div class="t-line"></div></div>
+          <div class="t-year">${esc(it.year)}</div>
+          <div class="t-body"><h5>${esc(it.title)}</h5><p>${esc(it.desc)}</p></div>
+        </div>`).join('');
+      return `<h3>${esc(slide.h)}</h3>${intro}<div class="timeline">${items}</div>`;
+    }
+    case 'tiers': {
+      const badge = slide.badge ? claudeChip(slide.badgeLabel) : '';
+      const intro = slide.intro ? `<p>${esc(slide.intro)}</p>` : '';
+      const items = (slide.items||[]).map(it=>`
+        <div class="tier-card ${it.highlight?'highlight':''}">
+          ${it.highlight?'<span class="tpill">Punto de partida</span>':''}
+          <h5>${esc(it.name)}</h5><p>${esc(it.desc)}</p>
+        </div>`).join('');
+      const note = slide.note ? `<p style="margin-top:14px; font-size:12.5px; color:var(--ink-soft);">${esc(slide.note)}</p>` : '';
+      return `${badge}<h3>${esc(slide.h)}</h3>${intro}<div class="tiers-grid">${items}</div>${note}`;
+    }
+    case 'video': {
+      const nota = slide.nota ? `<p class="${slide.nota.indexOf('⚠')===0?'video-note warn':'video-note'}">${esc(slide.nota)}</p>` : '';
+      /* Un video se puede reproducir dentro de esta página solo si su autor lo
+         permite (slide.embed) y si la página está publicada en http/https. */
+      const abreEnYoutube = (slide.embed === false) || !canEmbedVideos();
+      let aviso = '';
+      if(slide.embed === false){
+        aviso = `<p class="video-note">El autor de este video no permite reproducirlo dentro de otras páginas, así que al dar clic se abre en YouTube, en una pestaña nueva.</p>`;
+      }else if(!canEmbedVideos()){
+        aviso = `<p class="video-note">Estás abriendo este archivo directamente desde tu computadora: al dar clic, el video se abre en YouTube en una pestaña nueva. Publicado en línea (el link de la capacitación), se reproduce dentro de esta misma página.</p>`;
+      }
+      return `<h3>${esc(slide.titulo)}</h3>
+        <div class="video-facade" data-video-id="${esc(slide.id)}" data-abre-youtube="${abreEnYoutube?'1':'0'}">
+          <img src="https://img.youtube.com/vi/${esc(slide.id)}/hqdefault.jpg" alt="${esc(slide.titulo)}" loading="lazy">
+          <div class="playbtn">${playSvg()}</div>
+          ${abreEnYoutube ? '<span class="video-chip">Se abre en YouTube ↗</span>' : ''}
+        </div>
+        <a class="video-external-link" href="https://www.youtube.com/watch?v=${esc(slide.id)}" target="_blank" rel="noopener">Ver en YouTube ↗</a>${nota}${aviso}`;
+    }
+    case 'sessions': {
+      const items = SESSIONS.map(s=>`
+        <div class="item">
+          <div class="time">S${s.id}</div>
+          <div class="txt"><h5>${esc(s.titulo)}</h5><p>${esc(fmtDate(CONFIG.SESSION_DATES[s.id-1]))}</p></div>
+        </div>`).join('');
+      return `<h3>${esc(slide.h||'Las 5 sesiones del programa')}</h3><div class="agenda">${items}</div>`;
+    }
+    default: return '';
+  }
+}
+function renderSlideInline(slide){ return `<div class="slide-card">${slideBodyHtml(slide)}</div>`; }
+
+/* YouTube exige un "referer" HTTP válido para reproducir un video incrustado.
+   Un archivo abierto directamente desde el disco (file://) no envía ese dato y
+   el reproductor devuelve el "Error 153". En ese caso abrimos el video en una
+   pestaña nueva; publicado en http/https se reproduce dentro de la página. */
+function canEmbedVideos(){
+  return location.protocol === 'http:' || location.protocol === 'https:';
+}
+function bindVideoFacades(container){
+  container.querySelectorAll('.video-facade').forEach(f=>{
+    f.addEventListener('click', ()=>{
+      const id = f.dataset.videoId;
+      if(f.dataset.abreYoutube === '1'){
+        window.open('https://www.youtube.com/watch?v=' + id, '_blank', 'noopener');
+        return;
+      }
+      f.outerHTML = `<div class="video-wrap"><iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="video" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+    });
+  });
+}
+
+/* ---------- modo presentación (pantalla completa, navegación tipo PowerPoint) ---------- */
+let presentState = null;
+function startPresentation(slides, tag){
+  presentState = {slides, idx:0, tag};
+  document.addEventListener('keydown', presentKeyHandler);
+  document.addEventListener('fullscreenchange', presentFsHandler);
+  renderPresentOverlay(true);
+}
+function presentFsHandler(){
+  if(presentState && !document.fullscreenElement){ closePresentation(); }
+}
+function closePresentation(){
+  if(!presentState) return;
+  presentState = null;
+  document.removeEventListener('keydown', presentKeyHandler);
+  document.removeEventListener('fullscreenchange', presentFsHandler);
+  const el = document.getElementById('presentOverlay');
+  if(el) el.remove();
+  if(document.fullscreenElement) document.exitFullscreen().catch(()=>{});
+}
+function presentKeyHandler(e){
+  if(!presentState) return;
+  if(e.key==='Escape'){ closePresentation(); return; }
+  if(e.key==='ArrowRight' || e.key===' '){ e.preventDefault(); presentGo(1); }
+  if(e.key==='ArrowLeft'){ presentGo(-1); }
+}
+function presentGo(delta){
+  if(!presentState) return;
+  const n = presentState.slides.length;
+  presentState.idx = Math.min(n-1, Math.max(0, presentState.idx+delta));
+  renderPresentOverlay(false);
+}
+function renderPresentOverlay(first){
+  let el = document.getElementById('presentOverlay');
+  if(!el){
+    el = document.createElement('div');
+    el.id = 'presentOverlay';
+    el.className = 'present-overlay';
+    document.body.appendChild(el);
+  }
+  if(first && document.documentElement.requestFullscreen){
+    document.documentElement.requestFullscreen().catch(()=>{ /* el navegador puede bloquear fullscreen; la superposición sigue funcionando igual */ });
+  }
+  const {slides, idx, tag} = presentState;
+  const slide = slides[idx];
+  const dots = slides.map((_,i)=>`<span class="pd ${i===idx?'active':''}"></span>`).join('');
+  el.innerHTML = `
+    <div class="present-top">
+      <span class="ptag">${esc(tag)}</span>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <img src="${LCG_LOGO_LIGHT}" alt="London Consulting Group" class="present-lcg-logo">
+        <button class="present-close" id="presentCloseBtn">Salir (Esc)</button>
+      </div>
+    </div>
+    <div class="present-body"><div class="present-slide">${slideBodyHtml(slide)}</div></div>
+    <div class="present-bottom">
+      <button class="present-nav-btn" id="presentPrev" ${idx===0?'disabled':''} aria-label="Anterior">‹</button>
+      <div class="present-dots">${dots}</div>
+      <button class="present-nav-btn" id="presentNext" ${idx===slides.length-1?'disabled':''} aria-label="Siguiente">›</button>
+      <span class="present-counter">${idx+1} / ${slides.length}</span>
+    </div>
+  `;
+  document.getElementById('presentCloseBtn').addEventListener('click', closePresentation);
+  document.getElementById('presentPrev').addEventListener('click', ()=>presentGo(-1));
+  document.getElementById('presentNext').addEventListener('click', ()=>presentGo(1));
+  bindVideoFacades(el);
+}
+
+function buildSessionSlides(session){
+  const slides = [];
+  const focusTxt = (session.ladderFocus||[]).map(n=>LADDER.find(l=>l.n===n).nombre).join(', ');
+  slides.push({type:'ladder', focus:session.ladderFocus, preview:session.ladderPreview,
+    caption: focusTxt ? `Esta sesión trabaja de forma práctica: ${focusTxt}.` : 'Esta sesión es una demostración de visión, fuera del uso práctico diario.'});
+  (session.contenido||[]).forEach(b=> slides.push({type:'content', h:b.h, p:b.p, ul:b.ul, tabla:b.tabla, ejemplo:b.ejemplo, icon:b.icon, clave:b.clave}));
+  const vids = session.videos || (session.video ? [session.video] : []);
+  vids.forEach(v=> slides.push({type:'video', id:v.id, titulo:v.titulo, nota:v.nota, embed:v.embed}));
+  return slides;
+}
 
 /* ---------- Supabase (REST directo, sin dependencias externas) ---------- */
 async function supaInsert(table, row){
@@ -575,21 +1285,27 @@ function renderNav(){
   SESSIONS.forEach(s=>{
     html += `<button data-go="#${s.slug}" class="${hash==='#'+s.slug?'active':''}"><span class="n">S${s.id}</span>${esc(s.navLabel||s.titulo)}</button>`;
   });
-  html += `<button data-go="#admin" class="${hash==='#admin'?'active':''}">Panel Admin</button></div>`;
+  html += `</div>`;
   $nav.innerHTML = html;
   $nav.querySelectorAll('button[data-go]').forEach(b=>{
     b.addEventListener('click', ()=>{ location.hash = b.dataset.go; });
   });
 }
+document.addEventListener('DOMContentLoaded', ()=>{
+  const adminBtn = document.querySelector('.admin-corner-btn');
+  if(adminBtn) adminBtn.addEventListener('click', ()=>{ location.hash = '#admin'; });
+});
 
 /* ---------- Home ---------- */
 function renderLadder(focus=[], preview=[]){
   let html = `<div class="ladder">`;
   LADDER.forEach(r=>{
     let cls='rung', badge='';
-    if(focus.includes(r.n)){ cls+=' covered'; badge='<span class="badge">Esta sesión</span>'; }
+    // El Nivel 6 nunca se marca como "cubierto" ni "próximo a ver": este programa no capacita
+    // ni lleva al equipo hasta ese nivel, así que siempre se muestra en gris, como referencia.
+    if(r.n===6){ cls+=' preview'; badge='<span class="badge">Solo referencia</span>'; }
+    else if(focus.includes(r.n)){ cls+=' covered'; badge='<span class="badge">Esta sesión</span>'; }
     else if(preview.includes(r.n)){ cls+=' touch'; badge='<span class="badge">Se ve</span>'; }
-    else if(r.n===6 && !focus.includes(6)){ cls+=' preview'; }
     html += `<div class="${cls}">${badge}<div class="num">${r.n}</div><h5>${esc(r.nombre)}</h5><p>${esc(r.desc)}</p></div>`;
   });
   html += `</div>`;
@@ -606,23 +1322,29 @@ function renderHome(){
 
   $app.innerHTML = `
     <div class="hero" style="border-radius:16px;">
-      <div class="wrap" style="padding:0 4px;">
-        <span class="pill">IMPULSA · London Consulting Group</span>
-        <h1>Programa de Adopción de IA para KRAM</h1>
-        <p class="lead">Cinco sesiones de 65 minutos, de fundamentos a primera práctica con agentes. Nivel básico, pensado para el equipo de Promotoría y CEDIS Cancún.</p>
-        <div class="grid5">${cards}</div>
+      <span class="pill">IMPULSA · London Consulting Group</span>
+      <h1>Programa de Adopción de IA para KRAM</h1>
+      <p class="lead">Cinco sesiones de 65 minutos, de fundamentos a primera práctica con agentes. Nivel básico, pensado para el personal de KRAM seleccionado para este programa.</p>
+      <div class="grid5">${cards}</div>
+    </div>
+
+    <div class="card" style="margin-bottom:24px;">
+      <div class="deck-head">
+        <div class="section-title" style="margin-bottom:0;"><span class="dot"></span><h3>Introducción al programa</h3></div>
+        <button class="btn-present" id="presentInicio">${presentIcon()} Modo presentación</button>
       </div>
+      <div class="slide-stack" id="inicioSlides"></div>
     </div>
-    <div class="card" style="margin-bottom:20px;">
-      <div class="section-title"><span class="dot"></span><h3>La escalera de niveles de conocimiento de Claude</h3></div>
-      <p style="color:var(--ink-soft); font-size:13.5px; margin-bottom:18px;">Este es el mapa completo. Cada sesión del programa señala en qué peldaño estás trabajando. El programa te lleva del Nivel 1 al Nivel 5 de forma práctica — el Nivel 6 solo se muestra como visión en la Sesión 5.</p>
-      ${renderLadder([],[])}
-    </div>
+
     <div class="banner info">
       Cada quiz se responde en casa, dentro de las ${CONFIG.QUIZ_WINDOW_HOURS} horas siguientes al cierre de cada sesión en vivo. Se abre automáticamente al terminar la sesión y se cierra pasado ese plazo.
     </div>
   `;
   $app.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click', ()=>{ location.hash = el.dataset.go; }));
+
+  document.getElementById('inicioSlides').innerHTML = INICIO_SLIDES.map(renderSlideInline).join('');
+  bindVideoFacades(document.getElementById('inicioSlides'));
+  document.getElementById('presentInicio').addEventListener('click', ()=> startPresentation(INICIO_SLIDES, 'Introducción al programa'));
 }
 
 /* ---------- Session page ---------- */
@@ -630,19 +1352,11 @@ function renderSession(session){
   const {open, close} = quizWindow(session);
   const state = quizStateNow(session);
 
-  const blocks = session.contenido.map(b=>{
-    const ps = (b.p||[]).map(t=>`<p>${esc(t)}</p>`).join('');
-    const ul = b.ul ? `<ul>${b.ul.map(li=>`<li>${esc(li)}</li>`).join('')}</ul>` : '';
-    return `<div class="block"><h3>${esc(b.h)}</h3>${ps}${ul}</div>`;
-  }).join('');
-
   const agenda = session.agenda.map(a=>`
     <div class="item">
       <div class="time">${a.t} min</div>
       <div class="txt"><h5>${esc(a.titulo)}</h5><p>${esc(a.desc)}</p></div>
     </div>`).join('');
-
-  const videoNoteClass = session.video.nota && session.video.nota.indexOf('⚠')===0 ? 'video-note warn' : 'video-note';
 
   $app.innerHTML = `
     <div class="session-hero">
@@ -656,20 +1370,15 @@ function renderSession(session){
       </div>
     </div>
 
-    <div class="card" style="margin-bottom:24px;">
-      ${renderLadder(session.ladderFocus, session.ladderPreview)}
-    </div>
-
     <div class="two-col">
       <div class="stack">
         <div class="card">
-          <div class="section-title"><span class="dot"></span><h3>Contenido de la sesión</h3></div>
-          ${blocks}
-        </div>
-        <div class="card">
-          <div class="section-title"><span class="dot"></span><h3>Video de apoyo (≈5 min)</h3></div>
-          <div class="video-wrap"><iframe src="https://www.youtube-nocookie.com/embed/${session.video.id}" title="${esc(session.video.titulo)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-          <p class="${videoNoteClass}">${esc(session.video.titulo)}${session.video.nota ? ' — '+esc(session.video.nota) : ''}</p>
+          <div class="deck-head">
+            <div class="section-title" style="margin-bottom:0;"><span class="dot"></span><h3>Contenido de la sesión</h3></div>
+            <button class="btn-present" id="presentSession">${presentIcon()} Modo presentación</button>
+          </div>
+          <p style="font-size:12.5px; color:var(--ink-soft); margin:-8px 0 4px 0;">Pensado para proyectarse en vivo (Teams u otra pantalla compartida) — usa el botón de arriba para verlo en pantalla completa.</p>
+          <div class="slide-stack" id="sessionSlides"></div>
         </div>
         <div class="card" id="quizCard"></div>
       </div>
@@ -685,8 +1394,72 @@ function renderSession(session){
         </div>
       </div>
     </div>
+
+    ${(session.ejercicios && session.ejercicios.length) ? `<div class="card" style="margin-top:24px;" id="ejerciciosCard"></div>` : ''}
   `;
+
+  const slides = buildSessionSlides(session);
+  document.getElementById('sessionSlides').innerHTML = slides.map(renderSlideInline).join('');
+  bindVideoFacades(document.getElementById('sessionSlides'));
+  document.getElementById('presentSession').addEventListener('click', ()=> startPresentation(slides, session.titulo));
+
   renderQuizCard(session);
+  if(session.ejercicios && session.ejercicios.length) renderEjercicios(session);
+}
+
+/* ---------- Ejercicios aplicados ---------- */
+function renderEjercicios(session){
+  const el = document.getElementById('ejerciciosCard');
+  if(!el) return;
+  const items = session.ejercicios.map((ej,i)=>{
+    const pasos = (ej.pasos||[]).map(p=>`<li>${esc(p)}</li>`).join('');
+    const promptId = `ej-prompt-${session.id}-${i}`;
+    const promptBlock = ej.prompt ? `<div class="prompt-box">
+      <div class="prompt-header">
+        <span class="prompt-label">Prompt para copiar y pegar en Claude</span>
+        <button class="copy-btn" data-pid="${esc(promptId)}">Copiar</button>
+      </div>
+      <pre id="${esc(promptId)}" class="prompt-text">${esc(ej.prompt.texto)}</pre>
+    </div>` : '';
+    return `<div class="ejercicio-card">
+      <div class="ej-num">Ejercicio ${esc(String(ej.num||i+1))}</div>
+      <h4 class="ej-titulo">${esc(ej.titulo)}</h4>
+      ${ej.objetivo?`<p class="ej-objetivo">${esc(ej.objetivo)}</p>`:''}
+      <h5 class="ej-steps-label">Guía paso a paso</h5>
+      <ol class="ej-pasos">${pasos}</ol>
+      ${promptBlock}
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="section-title" style="margin-bottom:12px;"><span class="dot"></span><h3>Ejercicios aplicados</h3></div>
+    <p style="font-size:13px; color:var(--ink-soft); margin-bottom:20px;">Practica durante la sesión en vivo o en cualquier momento después. Cada ejercicio incluye una guía paso a paso y un prompt listo para usar en Claude.</p>
+    ${items}
+  `;
+
+  el.querySelectorAll('.copy-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const pid = btn.getAttribute('data-pid');
+      const pre = document.getElementById(pid);
+      if(!pre) return;
+      const txt = pre.textContent;
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(()=>{
+          btn.textContent='¡Copiado!'; btn.classList.add('copied');
+          setTimeout(()=>{ btn.textContent='Copiar'; btn.classList.remove('copied'); }, 2200);
+        }).catch(fallback);
+      } else { fallback(); }
+      function fallback(){
+        try{
+          const r=document.createRange(); r.selectNodeContents(pre);
+          const s=window.getSelection(); s.removeAllRanges(); s.addRange(r);
+          document.execCommand('copy'); s.removeAllRanges();
+          btn.textContent='¡Copiado!'; btn.classList.add('copied');
+          setTimeout(()=>{ btn.textContent='Copiar'; btn.classList.remove('copied'); }, 2200);
+        }catch(e){}
+      }
+    });
+  });
 }
 
 /* ---------- Quiz ---------- */
