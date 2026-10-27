@@ -908,6 +908,58 @@ const SESSIONS = [
   videos:[
     {id:"RjnqrKK3QoQ", titulo:"Le pedí a Claude un agente de WhatsApp con CRM y esto fue el resultado (canal Kevin Belier | Soluciones IA)", nota:null}
   ],
+  ejercicios:[
+    {
+      num:1,
+      titulo:"Instinct en vivo: tu agente de IA en WhatsApp y correo",
+      objetivo:"Registrarte en Instinct (gratis), conectarlo a tu correo y/o WhatsApp, y experimentar en vivo cómo un agente de IA puede leer tus emails, responderte dudas y hasta enviarte documentos — todo desde el chat.",
+      pasos:[
+        "REGISTRO (5 min): Entra a https://instinct.com/ → haz clic en 'Get started free' o 'Sign up'. Usa tu correo de trabajo. No necesitas tarjeta de crédito.",
+        "CONEXIÓN A CORREO (3 min): Una vez dentro, conecta tu cuenta de Gmail o Outlook cuando te lo pida. Instinct solicitará permisos de lectura — acéptalos. Esto es lo que le permite 'leer' tu bandeja.",
+        "CONEXIÓN A WHATSAPP (opcional, 2 min): Si la plataforma lo ofrece, sigue el flujo para vincular tu número de WhatsApp — normalmente escaneas un QR o recibes un mensaje de verificación.",
+        "PRIMERA PRUEBA — Correos pendientes: En el chat de Instinct escribe exactamente: '¿Qué correos tengo pendientes de responder de esta semana?' Observa cómo el agente lee tu bandeja y te responde en lenguaje natural.",
+        "SEGUNDA PRUEBA — Tarea concreta: Escribe: 'Redacta un borrador de respuesta para el correo más urgente que tengo.' Ve qué propone y si lo puedes enviar desde ahí mismo.",
+        "DEMO AVANZADA — Póliza de seguro (facilitador lo demuestra): Observa cómo el agente puede recibir una instrucción como 'Llena y envía la póliza de seguro de accidente para Juan García, empleado #1042' y completa el formulario automáticamente.",
+        "Comparte en el grupo: ¿Qué tarea de tu día a día podrías delegarle a un agente como este en los próximos 30 días?"
+      ],
+      prompt:{
+        titulo:"Prompts para probar en Instinct (cópialos uno por uno)",
+        texto:"PRUEBA 1 — Revisar bandeja:\n'¿Qué correos tengo pendientes de responder de esta semana? Dame un resumen con remitente, asunto y nivel de urgencia.'\n\nPRUEBA 2 — Acción sobre un correo:\n'Redacta un borrador de respuesta para el correo más urgente. Tono profesional, máximo 5 líneas.'\n\nPRUEBA 3 — Búsqueda específica:\n'¿Tengo algún correo de pedidos o solicitudes de clientes sin responder de los últimos 3 días?'\n\nPRUEBA 4 — Documento (demo del facilitador):\n'Necesito llenar una póliza de seguro de accidente para un colaborador. Guíame paso a paso y llena los campos con los datos que te dé.'"
+      }
+    },
+    {
+      num:2,
+      titulo:"Dashboard de inflación con datos reales (API Banco Mundial)",
+      objetivo:"Conectar Claude a una API pública real — el Banco Mundial — para construir un dashboard de inflación con datos de México, EE.UU., Colombia y Brasil (2015-2025). Reforzar el concepto de conexiones API.",
+      pasos:[
+        "Abre Claude (claude.ai) en una conversación nueva.",
+        "Copia y pega el prompt de abajo exactamente como está — no lo modifiques todavía.",
+        "Observa cómo Claude genera código que se conecta directamente a la API del Banco Mundial y construye el dashboard.",
+        "Una vez que el artefacto esté listo, explora las secciones: KPIs de inflación, gráfica de líneas (evolución), gráfica de barras (comparación por año) y la sección de Hallazgos automáticos.",
+        "Reflexión: ¿qué otras fuentes de datos públicos o de tu empresa podrías conectar de la misma manera?"
+      ],
+      prompt:{
+        titulo:"Prompt para construir el dashboard en Claude",
+        texto:"Construye un dashboard de inflación usando datos reales de la API del Banco Mundial. Conecta a este endpoint: https://api.worldbank.org/v2/indicator/FP.CPI.TOTL.ZG?format=json&date=2015:2025&per_page=500 y muestra datos de México (MEX), Estados Unidos (US), Colombia (COL) y Brasil (BRA).\n\nEl dashboard debe incluir:\n1. Tarjetas KPI: inflación más reciente de cada país + variación vs año anterior\n2. Gráfica de líneas: evolución anual 2015-2025 para los 4 países\n3. Gráfica de barras: comparación de los 4 países en el año seleccionado (selector interactivo)\n4. Tabla de datos completa con opción de exportar a CSV\n5. Sección 'Hallazgos': 3 insights automáticos basados en los datos\n\nHaz todo en un solo artefacto HTML autocontenido con diseño profesional. Maneja el caso de datos faltantes sin romper el dashboard."
+      }
+    },
+    {
+      num:3,
+      titulo:"Consolidador de pedidos: 3 clientes, 1 formato ERP",
+      objetivo:"Construir con Claude un dashboard que lea pedidos de 3 clientes ficticios — cada uno con su propio nombre para el mismo SKU — y los consolide en un formato único listo para cargar al ERP. Simular la conexión a una carpeta local con archivos Excel.",
+      pasos:[
+        "Copia el prompt de abajo en Claude. Este prompt ya incluye los datos ficticios de los 3 clientes simulando lo que tendrías en Excel.",
+        "Claude generará un artefacto con los pedidos de cada cliente, la tabla de equivalencias de SKU y la vista consolidada lista para ERP.",
+        "Explora el artefacto: cambia cantidades, agrega un pedido ficticio, y observa cómo se actualiza el consolidado.",
+        "Discusión: ¿cómo conectarías esto a carpetas reales de tu escritorio? (Próximo paso: automatización con Make o con un script Python que lea archivos de una carpeta).",
+        "Comparte en el grupo: ¿qué clientes reales de KRAM tienen este problema de nomenclatura de SKUs?"
+      ],
+      prompt:{
+        titulo:"Prompt para construir el consolidador de pedidos",
+        texto:"Construye un dashboard consolidador de pedidos en HTML. Tengo 3 clientes que me piden el mismo producto pero cada uno lo llama diferente:\n\nCliente 1 — Autoservicio Del Valle:\n- 'Refresco Cola 600ml c/24' → 10 cajas, precio $185\n- 'Agua Mineral 1L c/12' → 5 cajas, precio $120\n- 'Jugo Naranja 1L c/12' → 8 cajas, precio $145\n\nCliente 2 — Tiendas Caribe:\n- 'COLA PET 600 CAJA' → 15 cajas, precio $188\n- 'AGUA MINERAL CAJA 12P' → 3 cajas, precio $122\n- 'JUGO NAR 1LT C12' → 6 cajas, precio $148\n\nCliente 3 — Distribuidora Península:\n- 'Bebida gaseosa cola 600cc x24u' → 7 cajas, precio $183\n- 'Agua s/gas 1000ml x12' → 10 cajas, precio $118\n- 'Néctar naranja 1L pack12' → 4 cajas, precio $143\n\nClave de equivalencias (SKU interno KRAM):\n- SKU-001: Refresco Cola 600ml c/24 = COLA PET 600 CAJA = Bebida gaseosa cola 600cc x24u\n- SKU-002: Agua Mineral 1L c/12 = AGUA MINERAL CAJA 12P = Agua s/gas 1000ml x12\n- SKU-003: Jugo Naranja 1L c/12 = JUGO NAR 1LT C12 = Néctar naranja 1L pack12\n\nEl dashboard debe mostrar:\n1. Vista por cliente (3 tabs o secciones) con sus pedidos en su formato original\n2. Tabla consolidada con SKU KRAM, descripción estándar, total de cajas por SKU (suma de los 3 clientes), precio promedio ponderado\n3. Formato de carga ERP: tabla lista para copiar con columnas: SKU | Descripción | Cantidad | Precio unitario | Total\n4. Resumen: total de líneas, total de cajas, importe total\n\nDiseño limpio y profesional. Incluye un botón 'Exportar a CSV' para el formato ERP."
+      }
+    }
+  ],
   quiz:[
     {q:"Un agente \"punta a punta\" (end-to-end) se caracteriza por:", opts:["Responder una sola pregunta y terminar","Encadenar varios pasos (recibir, analizar, decidir, generar, notificar) sin intervención manual en cada paso","Solo funcionar en modo offline","Reemplazar por completo al equipo humano"], correct:1},
     {q:"En la escalera de niveles vista en el programa, un agente punta a punta corresponde a:", opts:["El nivel más básico (Nivel 1)","Un nivel avanzado (Nivel 6), fuera del alcance de este programa básico","Ningún nivel en particular","Lo mismo que un simple chat"], correct:1},
